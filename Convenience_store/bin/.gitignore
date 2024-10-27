@@ -1,2 +1,8 @@
-/test/
+/ConvenienceStore.sql
+/controller/
+/dao/
+/entity/
 /frm/
+/image/
+/sqljdbc4-2.0.jar
+/test/

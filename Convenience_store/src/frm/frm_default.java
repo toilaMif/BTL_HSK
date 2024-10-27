@@ -9,26 +9,27 @@ import java.awt.event.MouseListener;
 import java.awt.*;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+
 
 public class frm_default extends JFrame implements ActionListener, MouseListener {
 
+	private JMenuBar menubar;
+	private JMenu menuNV;
 	private JPanel jpCen;
-	private JPanel jpMenu;
-	private JMenuBar jMenu;
-	private Object jmnNV;
-	private JMenuBar mnubar;
-	private JMenu mnuFile;
-	private JMenu mnuEdit;
-	private JMenu mnuHelp;
-	
+	private JMenu menuSP;
+	private JMenu menuKH;
+	private JMenu menuHD;
+	private JMenu menuDM;
+	private JMenu menuTK;
 
-	 
 
 	public frm_default() {
 		super("Cửa Hàng Tiện Lợi");
@@ -36,25 +37,68 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+		//Phần center
 		jpCen = new JPanel();
 		jpCen.setLayout(new BorderLayout());
-		jpCen.setBackground(Color.black);
+		jpCen.setBackground(Color.gray);
 
-		jpMenu = new JPanel();
-		jpMenu.setBackground(Color.WHITE);
+		//Menu
+		menubar = new JMenuBar();
+		menubar.setBackground(new Color(163, 184, 204));
+		setJMenuBar(menubar);
+
+		menuNV = new JMenu("Nhân Viên");
+		menuNV.setForeground(Color.WHITE);
+		menuNV.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
+		menuNV.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
+		menuNV.setIcon(new ImageIcon(getClass().getResource("/image/NV.png")));
+		menubar.add(menuNV);
 		
-		mnubar = new JMenuBar();
+		menuKH = new JMenu("Khách Hàng");
+		menuKH.setForeground(Color.WHITE);
+		menuKH.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
+		menuKH.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
+		menuKH.setIcon(new ImageIcon(getClass().getResource("/image/KH.png")));
+		menubar.add(menuKH);
+		
+		menuSP = new JMenu("Sản Phẩm");
+		menuSP.setForeground(Color.WHITE);
+		menuSP.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
+		menuSP.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
+		menuSP.setIcon(new ImageIcon(getClass().getResource("/image/SP.png")));
+		menubar.add(menuSP);
+		
+		menuDM = new JMenu("Danh Mục");
+		menuDM.setForeground(Color.WHITE);
+		menuDM.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
+		menuDM.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
+		menuDM.setIcon(new ImageIcon(getClass().getResource("/image/DM.png")));
+		menubar.add(menuDM);
+		
+		menuHD = new JMenu("Hóa Đơn");
+		menuHD.setForeground(Color.WHITE);
+		menuHD.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
+		menuHD.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
+		menuHD.setIcon(new ImageIcon(getClass().getResource("/image/HD.png")));
+		menubar.add(menuHD);
+		
+		menuTK = new JMenu("Thống Kê");
+		menuTK.setForeground(Color.WHITE);
+		menuTK.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
+		menuTK.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
+		menuTK.setIcon(new ImageIcon(getClass().getResource("/image/TK.png")));
+		menubar.add(menuTK);
+		
+		
 		
 
-		mnuFile = new JMenu("File");     mnubar.add(mnuFile);		
-		mnuEdit = new JMenu("Edit");    mnubar.add(mnuEdit);
-		mnuHelp = new JMenu("Help");  mnubar.add(mnuHelp);
 
-		jpMenu.add(mnubar);
-		jpCen.add(jpMenu, BorderLayout.NORTH);
+
+		
+		
 		
 		setContentPane(jpCen);
-		
+
 		setVisible(true);
 
 	}
