@@ -8,15 +8,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.*;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 
 
 public class frm_default extends JFrame implements ActionListener, MouseListener {
@@ -29,6 +32,9 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 	private JMenu menuHD;
 	private JMenu menuDM;
 	private JMenu menuTK;
+	private JMenu menuDNTK;
+	private JPanel jpTitle;
+	private JLabel jlTitle;
 
 
 	public frm_default() {
@@ -39,12 +45,13 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 
 		//Phần center
 		jpCen = new JPanel();
-		jpCen.setLayout(new BorderLayout());
+		jpCen.add(Box.createHorizontalGlue());
 		jpCen.setBackground(Color.gray);
 
 		//Menu
 		menubar = new JMenuBar();
 		menubar.setBackground(new Color(163, 184, 204));
+		menubar.setLayout(new BoxLayout(menubar, BoxLayout.X_AXIS));
 		setJMenuBar(menubar);
 
 		menuNV = new JMenu("Nhân Viên");
@@ -90,10 +97,25 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 		menubar.add(menuTK);
 		
 		
+		menubar.add(Box.createHorizontalStrut(680));
 		
+		menuDNTK = new JMenu("Đăng Nhập");
+		menuDNTK.setForeground(Color.WHITE);
+		menuDNTK.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
+		menuDNTK.setIcon(new ImageIcon(getClass().getResource("/image/ICONTK.png")));
+		menubar.add(menuDNTK);
 
-
-
+		
+		jpTitle = new JPanel();
+		jpTitle.setBackground(null);
+//		jpTitle.setBorder(BorderFactory.createLineBorder(Color.white));
+//		jpTitle.setPreferredSize(new Dimension(1000, 200));
+		jlTitle = new JLabel("Cửa Hàng Tiện lợi");
+		Font fn = new Font("Times New Roman", Font.BOLD + Font.ITALIC, 50);
+		jlTitle.setFont(fn);
+		jlTitle.setForeground(Color.WHITE);
+		jpTitle.add(jlTitle);
+		jpCen.add(jpTitle);
 		
 		
 		
