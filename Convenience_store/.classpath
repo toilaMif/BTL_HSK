@@ -8,10 +8,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="src" path="sql"/>
-	<classpathentry kind="lib" path="C:/Users/nguye/OneDrive/Máy tính/BTL_HSK/Convenience_store/lib/sqljdbc4-2.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="lib/sqljdbc4-2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
