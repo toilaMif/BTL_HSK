@@ -26,7 +26,7 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 
 	private JMenuBar menubar;
 	private JMenu menuNV;
-	private JPanel jpCen;
+	public JPanel jpCen;
 	private JMenu menuSP;
 	private JMenu menuKH;
 	private JMenu menuHD;
@@ -34,7 +34,7 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 	private JMenu menuTK;
 	private JMenu menuDNTK;
 	private JPanel jpTitle;
-	private JLabel jlTitle;
+	public JLabel jlTitle;
 
 
 	public frm_default() {
@@ -119,9 +119,10 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 		
 		
 		
-		setContentPane(jpCen);
+//		setContentPane(jpCen);
+		add(jpCen, BorderLayout.CENTER);
 
-		setVisible(true);
+//		setVisible(true);
 
 	}
 
