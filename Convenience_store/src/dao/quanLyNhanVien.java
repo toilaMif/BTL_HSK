@@ -3,17 +3,17 @@ package dao;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import entity.thongTinNhanVien;
+import entity.nhanVien;
 
 public class quanLyNhanVien implements Serializable{
 
-	private ArrayList<thongTinNhanVien> list;
+	private ArrayList<nhanVien> list;
 	
 	public quanLyNhanVien() {	
-		list = new ArrayList<thongTinNhanVien>();
+		list = new ArrayList<nhanVien>();
 	}
 	
-	public ArrayList<thongTinNhanVien> getListEmp(){
+	public ArrayList<nhanVien> getListEmp(){
 		return list;
 	}
 	
