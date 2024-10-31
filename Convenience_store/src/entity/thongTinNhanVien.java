@@ -13,6 +13,7 @@ public class thongTinNhanVien implements Serializable{
 	private String diaChi;
 	private String sdt;
 	private LocalDate ngayVaoLam;
+	private double luong;
 	
 	
 	public thongTinNhanVien(String maNV) {
@@ -24,9 +25,10 @@ public class thongTinNhanVien implements Serializable{
 		this.diaChi = "";
 		this.sdt = "";
 		this.ngayVaoLam = LocalDate.now();
+		this.luong = 0.0;
 	}
 	public thongTinNhanVien(String maNV, String tenNV, boolean phai, LocalDate ngaySinh, String diaChi, String sdt,
-			LocalDate ngayVaoLam) {
+			LocalDate ngayVaoLam, double luong) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = tenNV;
@@ -35,6 +37,7 @@ public class thongTinNhanVien implements Serializable{
 		this.diaChi = diaChi;
 		this.sdt = sdt;
 		this.ngayVaoLam = ngayVaoLam;
+		this.luong = luong;
 	}
 	public String getMaNV() {
 		return maNV;
@@ -77,6 +80,14 @@ public class thongTinNhanVien implements Serializable{
 	}
 	public void setNgayVaoLam(LocalDate ngayVaoLam) {
 		this.ngayVaoLam = ngayVaoLam;
+	}
+	
+	
+	public double getLuong() {
+		return luong;
+	}
+	public void setLuong(double luong) {
+		this.luong = luong;
 	}
 	@Override
 	public int hashCode() {

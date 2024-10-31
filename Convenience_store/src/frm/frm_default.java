@@ -122,6 +122,7 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 //		setContentPane(jpCen);
 		add(jpCen, BorderLayout.CENTER);
 
+		
 //		setVisible(true);
 
 	}
