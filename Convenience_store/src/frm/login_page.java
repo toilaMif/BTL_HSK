@@ -30,7 +30,7 @@ public class login_page extends JFrame implements ActionListener, MouseListener{
 	
 	
 	public login_page(){
-		
+		setResizable(false);
 		pWest = new JPanel();
 		pWest.setPreferredSize(new Dimension(600,500));
 		pWest.setLayout(new GridBagLayout());
@@ -71,6 +71,7 @@ public class login_page extends JFrame implements ActionListener, MouseListener{
 		pEast.add(l_ten_dang_nhap, gbcR);
 		
 		txtTenDangNhap = new JTextField(30);
+		txtTenDangNhap.setBorder(null);
 		gbcR.gridy = 2;
 		pEast.add(txtTenDangNhap, gbcR);
 		
