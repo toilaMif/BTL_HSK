@@ -265,7 +265,7 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 		pQuanly.add(Box.createHorizontalStrut(70));
 		pQuanly.add(bRight);		
 		jpCen.add(pQuanly);
-		String[] cells = {"Mã nhân viên", "Tên nhân viên", "Phái", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Ngày vào làm", "Lươngư"};
+		String[] cells = {"Mã nhân viên", "Tên nhân viên", "Phái", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Ngày vào làm", "Lương"};
 		model_tableNV = new DefaultTableModel(cells,0);
 		table_nhanvien = new JTable(model_tableNV);
 		JScrollPane scroll = new JScrollPane(table_nhanvien);

@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class nhanVien implements Serializable{
-	
+public class NhanVien implements Serializable{
 	private String maNV;
 	private String tenNV;
 	private boolean phai;
@@ -15,8 +14,8 @@ public class nhanVien implements Serializable{
 	private LocalDate ngayVaoLam;
 	private double luong;
 	
-	
-	public nhanVien(String maNV) {
+
+	public NhanVien(String maNV) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = "";
@@ -27,8 +26,8 @@ public class nhanVien implements Serializable{
 		this.ngayVaoLam = LocalDate.now();
 		this.luong = 0.0;
 	}
-	public nhanVien(String maNV, String tenNV, boolean phai, LocalDate ngaySinh, String diaChi, String sdt,
-			LocalDate ngayVaoLam, double luong) {
+	public NhanVien(String maNV, String tenNV, boolean phai, LocalDate ngaySinh, String diaChi, String sdt,
+			LocalDate ngayVaoLam) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = tenNV;
@@ -101,8 +100,9 @@ public class nhanVien implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		nhanVien other = (nhanVien) obj;
-		return Objects.equals(maNV, other.maNV);
+
+		NhanVien other = (NhanVien) obj;
+		return Objects.equals(maNV, other.maNV) || Objects.equals(tenNV, other.tenNV);
 	}
 
 }

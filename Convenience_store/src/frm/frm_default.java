@@ -97,8 +97,8 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 		menubar.add(menuTK);
 		
 		
-		menubar.add(Box.createHorizontalStrut(680));
 		
+		menubar.add(Box.createHorizontalGlue());
 		menuDNTK = new JMenu("Đăng Nhập");
 		menuDNTK.setForeground(Color.WHITE);
 		menuDNTK.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
