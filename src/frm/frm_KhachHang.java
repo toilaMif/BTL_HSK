@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout.Group;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -36,14 +37,14 @@ public class frm_KhachHang extends frm_default {
 		
 //		contain = Box.createVerticalBox();
 //		contain.setBorder(BorderFactory.createLineBorder(Color.red, 3));
-		contain.setPreferredSize(new Dimension(1550,800));
-		contain.setMaximumSize(new Dimension(1550,800));
-		contain.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 20));
+		contain.setPreferredSize(new Dimension(1533,730));
+		contain.setMaximumSize(new Dimension(1533,730));
+		contain.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
 		bTTSP = Box.createHorizontalBox();
 //		bTTSP.setBorder(BorderFactory.createLineBorder(Color.red, 3));
-		bTTSP.setPreferredSize(new Dimension(1510,180));
-		bTTSP.setMaximumSize(new Dimension(1510,180));
+		bTTSP.setPreferredSize(new Dimension(1533,180));
+		bTTSP.setMaximumSize(new Dimension(1333,180));
 		
 		//Săp xếp
 		JPanel sortPanel = new JPanel(new GridLayout(2,2,5,5 ));
@@ -92,6 +93,9 @@ public class frm_KhachHang extends frm_default {
         JTextField idTextField = new JTextField(20);
         JButton searchButton = new JButton("Tìm");
         JButton cancelButton = new JButton("Hủy");
+        ButtonGroup sBT = new ButtonGroup();
+        sBT.add(searchByID);
+        sBT.add(searchByName);
         
         //Set kích thước cho nút
         searchButton.setPreferredSize(new Dimension(70, 20));
@@ -135,7 +139,7 @@ public class frm_KhachHang extends frm_default {
         tables = Box.createHorizontalBox();
 		tables.setPreferredSize(new Dimension(1500,100));
 		tables.setMaximumSize(new Dimension(1500,100));
-		tables.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		tables.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         
 		
         modeltb = new DefaultTableModel(new String[] {"Mã Khách Hàng","Họ Tên","Ngày sinh","Giới tính","Loại thành viên"},0);

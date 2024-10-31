@@ -43,6 +43,8 @@ public class frm_controlKH extends frm_default {
 	private JTextField tf2;
 	private JLabel tt21;
 	private JTextField tf21;
+	private JRadioButton nam;
+	private JRadioButton nu;
 	
 	public frm_controlKH() {
 		super();
@@ -54,26 +56,26 @@ public class frm_controlKH extends frm_default {
 		
 //		contain = Box.createVerticalBox();
 //		contain.setBorder(BorderFactory.createLineBorder(Color.red, 3));
-		contain.setPreferredSize(new Dimension(1550,800));
-		contain.setMaximumSize(new Dimension(1550,800));
-		contain.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 20));
+		contain.setPreferredSize(new Dimension(1533,730));
+		contain.setMaximumSize(new Dimension(1533,730));
+		contain.setBorder(BorderFactory.createEmptyBorder(5, 10, 10, 10));
 		
 		bTTSP = Box.createHorizontalBox();
 //		bTTSP.setBorder(BorderFactory.createLineBorder(Color.red, 3));
-		bTTSP.setPreferredSize(new Dimension(1510,180));
-		bTTSP.setMaximumSize(new Dimension(1510,180));
+		bTTSP.setPreferredSize(new Dimension(1533,180));
+		bTTSP.setMaximumSize(new Dimension(1533,180));
 		
 		//Săp xếp
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
 		inputPanel.setBorder(BorderFactory.createTitledBorder(
 	            BorderFactory.createLineBorder(Color.RED),"Thông tin khách hàng "));
-		inputPanel.setPreferredSize(new Dimension(850,100));
-		inputPanel.setMaximumSize(new Dimension(850,150));
+		inputPanel.setPreferredSize(new Dimension(780,100));
+		inputPanel.setMaximumSize(new Dimension(780,150));
         
 		i1 = Box.createHorizontalBox();
-		i1.setPreferredSize(new Dimension(850,30));
-		i1.setMaximumSize(new Dimension(850,40));
+		i1.setPreferredSize(new Dimension(780,30));
+		i1.setMaximumSize(new Dimension(780,40));
 		i1.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		i1.add(tt1 = new JLabel("Mã Khách hàng: "));
 		i1.add(Box.createHorizontalStrut(5));
@@ -84,12 +86,19 @@ public class frm_controlKH extends frm_default {
 		i1.add(tf11 = new JTextField());
 		i1.add(Box.createHorizontalStrut(10));
 		i1.add(tt12 = new JLabel("Giới tính: "));
+//		i1.add(Box.createHorizontalStrut(5));
+//		i1.add(cbo1 = new JComboBox<String>(new String[]{"Nam", "Nữ"}));
+		i1.add(Box.createHorizontalStrut(50));
 		i1.add(Box.createHorizontalStrut(5));
-		i1.add(cbo1 = new JComboBox<String>(new String[]{"Nam", "Nữ"}));
+		i1.add(nam = new JRadioButton("Nam"));
+		i1.add(nu = new JRadioButton("Nữ"));
+		ButtonGroup gt = new ButtonGroup();
+		gt.add(nam);
+		gt.add(nu);
 		
 		i2 = Box.createHorizontalBox();
-		i2.setPreferredSize(new Dimension(850,30));
-		i2.setMaximumSize(new Dimension(850,40));
+		i2.setPreferredSize(new Dimension(780,30));
+		i2.setMaximumSize(new Dimension(780,40));
 		i2.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		i2.add(tt2 = new JLabel("Số điện thoại: "));
 		i2.add(Box.createHorizontalStrut(18));
@@ -104,12 +113,12 @@ public class frm_controlKH extends frm_default {
 		tf1.setMaximumSize(new Dimension(200,25));
 		tf11.setPreferredSize(new Dimension(200,25));
 		tf11.setMaximumSize(new Dimension(200,25));
-		tf2.setPreferredSize(new Dimension(200,25));
-		tf2.setMaximumSize(new Dimension(200,25));
-		cbo1.setPreferredSize(new Dimension(200,25));
-		cbo1.setMaximumSize(new Dimension(200,25));
-		tf21.setPreferredSize(new Dimension(182,25));
-		tf21.setMaximumSize(new Dimension(182,25));
+		tf2.setPreferredSize(new Dimension(195,25));
+		tf2.setMaximumSize(new Dimension(195,25));
+//		cbo1.setPreferredSize(new Dimension(200,25));
+//		cbo1.setMaximumSize(new Dimension(200,25));
+		tf21.setPreferredSize(new Dimension(175,25));
+		tf21.setMaximumSize(new Dimension(175,25));
         
 		inputPanel.add(Box.createVerticalStrut(20));
 		inputPanel.add(i1);
@@ -120,8 +129,8 @@ public class frm_controlKH extends frm_default {
 
         //Table
         tables = Box.createHorizontalBox();
-		tables.setPreferredSize(new Dimension(1500,500));
-		tables.setMaximumSize(new Dimension(1500,500));
+		tables.setPreferredSize(new Dimension(1533,500));
+		tables.setMaximumSize(new Dimension(1533,500));
 		tables.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
         
 		
@@ -135,8 +144,8 @@ public class frm_controlKH extends frm_default {
 		
 		//Các nút chức năng
 		JPanel pS5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		pS5.setPreferredSize(new Dimension(1500,50));
-		pS5.setMaximumSize(new Dimension(1500,50));
+		pS5.setPreferredSize(new Dimension(1533,50));
+		pS5.setMaximumSize(new Dimension(1533,50));
 		pS5.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
 		pS5.add(bt1 = new JButton("Làm mới"));
 		pS5.add(bt2 = new JButton("Thêm khách hàng"));

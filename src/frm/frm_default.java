@@ -106,16 +106,16 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 		menubar.add(menuDNTK);
 
 		
-//		jpTitle = new JPanel();
-//		jpTitle.setBackground(null);
-////		jpTitle.setBorder(BorderFactory.createLineBorder(Color.white));
-////		jpTitle.setPreferredSize(new Dimension(1000, 200));
-//		jlTitle = new JLabel("Cửa Hàng Tiện lợi");
-//		Font fn = new Font("Times New Roman", Font.BOLD + Font.ITALIC, 50);
-//		jlTitle.setFont(fn);
-//		jlTitle.setForeground(Color.WHITE);
-//		jpTitle.add(jlTitle);
-//		jpCen.add(jpTitle);
+		jpTitle = new JPanel();
+		jpTitle.setBackground(null);
+//		jpTitle.setBorder(BorderFactory.createLineBorder(Color.white));
+//		jpTitle.setPreferredSize(new Dimension(1000,200));
+		jlTitle = new JLabel("Cửa Hàng Tiện lợi");
+		Font fn = new Font("Times New Roman", Font.BOLD + Font.ITALIC, 50);
+		jlTitle.setFont(fn);
+		jlTitle.setForeground(Color.WHITE);
+		jpTitle.add(jlTitle);
+		jpCen.add(jpTitle);
 		
 		
 		setSize(1000,500);
