@@ -104,16 +104,7 @@ CREATE TABLE DatHangONL (
 	FOREIGN KEY (maNV) REFERENCES NhanVien(maNV),
 	FOREIGN KEY (maKH) REFERENCES KhachHang(maKH)
 );
---CREATE TABLE ChiTietDonDat (
---	maCTDH VARCHAR (10) primary key,
---	tenKH NVARCHAR (50) NOT NULL,
---	tenNV NVARCHAR (50) NOT NULL,
---	ngayDat DateTime NOT NULL,
---	tongTien FLOAT NOT NULL,
---	tranhThaiThanhToan CHAR(1) NOT NULL,
 
---	--FOREIGN KEY (maCTBaoCao) REFERENCES BaoCao(maBaoCao)
---);
 CREATE TABLE HoaDon (
 	maHoaDon VARCHAR (10) primary key,
 	maNV VARCHAR (10) NOT NULL,
@@ -124,6 +115,45 @@ CREATE TABLE HoaDon (
 	FOREIGN KEY (maNV) REFERENCES NhanVien(maNV),
 	FOREIGN KEY (maKH) REFERENCES KhachHang(maKH)
 );
+CREATE TABLE ChiTietHoaDon (
+    maCTHoaDon VARCHAR(10) NOT NULL PRIMARY KEY,
+    tenNguoiLap NVARCHAR(50) NOT NULL,
+    ngayLap DATETIME NOT NULL,
+    tenKH NVARCHAR(50) NOT NULL,
+    tongSLSP INT NOT NULL,
+    tongThanhTien FLOAT NOT NULL,
+    FOREIGN KEY (maCTHoaDon) REFERENCES HoaDon(maHoaDon)
+);
+CREATE TABLE ChiTietDonDat (
+    maCTDH VARCHAR(10) NOT NULL PRIMARY KEY,
+    tenKH NVARCHAR(50) NOT NULL,
+    tenNV NVARCHAR(50) NOT NULL,
+    ngayDat DATETIME NOT NULL,
+    tongSoLuongSP INT NOT NULL,
+    tongTien FLOAT NOT NULL,
+    tranhThaiThanhToan CHAR(1) NOT NULL,
+    trangThai CHAR(1) NOT NULL,
+	FOREIGN KEY (maCTDH) REFERENCES DatHangONL(maDatHang)
+);
+CREATE TABLE HDSP (
+    maSP VARCHAR(10) NOT NULL PRIMARY KEY,
+    maCTHoaDon VARCHAR(10) NOT NULL,
+    tenSP NVARCHAR(50) NOT NULL,
+    donGia FLOAT NOT NULL,
+    soLuong INT NOT NULL,
+    FOREIGN KEY (maCTHoaDon) REFERENCES ChiTietHoaDon(maCTHoaDon),
+    FOREIGN KEY (maSP) REFERENCES SanPham(maSP)
+);
+CREATE TABLE OrderSP (
+    maSP VARCHAR(10) NOT NULL PRIMARY KEY,
+    maCTDH VARCHAR(10) NOT NULL,
+    tenSP NVARCHAR(50) NOT NULL,
+    donGia FLOAT NOT NULL,
+    soLuong INT NOT NULL,
+    FOREIGN KEY (maCTDH) REFERENCES ChiTietDonDat(maCTDH),
+    FOREIGN KEY (maSP) REFERENCES SanPham(maSP)
+);
+
 
 
 
