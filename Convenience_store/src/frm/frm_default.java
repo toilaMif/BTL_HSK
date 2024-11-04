@@ -40,6 +40,7 @@ public class frm_default extends JFrame implements ActionListener, MouseListener
 	public frm_default() {
 		super("Cửa Hàng Tiện Lợi");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		setSize(500, 550);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 

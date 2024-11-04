@@ -26,7 +26,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import dao.quanLyNhanVien;
+import dao.NhanVien_Dao;
 
 public class frm_dsNhanVien extends frm_default implements ActionListener, MouseListener{
 

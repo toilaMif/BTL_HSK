@@ -13,6 +13,7 @@ public class NhanVien implements Serializable{
 	private String sdt;
 	private LocalDate ngayVaoLam;
 	private double luong;
+	private String account;
 	
 
 	public NhanVien(String maNV) {
@@ -25,9 +26,10 @@ public class NhanVien implements Serializable{
 		this.sdt = "";
 		this.ngayVaoLam = LocalDate.now();
 		this.luong = 0.0;
+		this.account = " ";
 	}
 	public NhanVien(String maNV, String tenNV, boolean phai, LocalDate ngaySinh, String diaChi, String sdt,
-			LocalDate ngayVaoLam) {
+			LocalDate ngayVaoLam, double luong, String account) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = tenNV;
@@ -37,6 +39,7 @@ public class NhanVien implements Serializable{
 		this.sdt = sdt;
 		this.ngayVaoLam = ngayVaoLam;
 		this.luong = luong;
+		this.account = account;
 	}
 	public String getMaNV() {
 		return maNV;
@@ -80,8 +83,12 @@ public class NhanVien implements Serializable{
 	public void setNgayVaoLam(LocalDate ngayVaoLam) {
 		this.ngayVaoLam = ngayVaoLam;
 	}
-	
-	
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
 	public double getLuong() {
 		return luong;
 	}

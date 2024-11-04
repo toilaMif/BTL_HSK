@@ -52,10 +52,9 @@ CREATE TABLE NhanVien (
 	tenNV NVARCHAR (50) NOT NULL,
 	ngaySinh DateTime,
 	diaChi NVARCHAR (50) ,
-	gioiTinh NVARCHAR (5) NOT NULL,
+	gioiTinh CHAR (1) NOT NULL,
 	luong Float NOT NULL,
 	ngayVaoLam DateTime,
-	chucVu NVARCHAR (50),
 	sdt int NOT NULL,
 
 );
@@ -87,8 +86,44 @@ CREATE TABLE ChiTietBaoCao (
 
 	FOREIGN KEY (maCTBaoCao) REFERENCES BaoCao(maBaoCao)
 );
+CREATE TABLE KhachHang (
+	maKH VARCHAR (10) primary key,
+	tenKH NVARCHAR (50) NOT NULL,
+	ngaySinh DateTime NOT NULL,
+	gioiTinh CHAR(1) NOT NULL,
+	loaiThanhVien NVARCHAR (50) NOT NULL,
+);
+CREATE TABLE DatHangONL (
+	maDatHang VARCHAR (10) primary key,
+	maNV VARCHAR (10) NOT NULL,
+	maKH VARCHAR (10) NOT NULL,
+	tenKH NVARCHAR (50) NOT NULL,
+	ngayDat DateTime NOT NULL,
+	tongTien FLOAT NOT NULL,
+	tranhThaiThanhToan CHAR(1) NOT NULL,
+	FOREIGN KEY (maNV) REFERENCES NhanVien(maNV),
+	FOREIGN KEY (maKH) REFERENCES KhachHang(maKH)
+);
+--CREATE TABLE ChiTietDonDat (
+--	maCTDH VARCHAR (10) primary key,
+--	tenKH NVARCHAR (50) NOT NULL,
+--	tenNV NVARCHAR (50) NOT NULL,
+--	ngayDat DateTime NOT NULL,
+--	tongTien FLOAT NOT NULL,
+--	tranhThaiThanhToan CHAR(1) NOT NULL,
 
-
+--	--FOREIGN KEY (maCTBaoCao) REFERENCES BaoCao(maBaoCao)
+--);
+CREATE TABLE HoaDon (
+	maHoaDon VARCHAR (10) primary key,
+	maNV VARCHAR (10) NOT NULL,
+	maKH VARCHAR (10) NOT NULL,
+	tenKH NVARCHAR (50) NOT NULL,
+	tongTien FLOAT NOT NULL,
+	hinhThucThanhToan NVARCHAR (50) NOT NULL,
+	FOREIGN KEY (maNV) REFERENCES NhanVien(maNV),
+	FOREIGN KEY (maKH) REFERENCES KhachHang(maKH)
+);
 
 
 

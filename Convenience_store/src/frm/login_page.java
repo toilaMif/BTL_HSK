@@ -81,6 +81,8 @@ public class login_page extends JFrame implements ActionListener, MouseListener{
 		pEast.add(l_password, gbcR);
 
 		txtPassword = new JTextField(30);
+		txtPassword.setBorder(null);
+		
 		gbcR.gridy = 4;
 		pEast.add(txtPassword, gbcR);
 		pEast.setBackground(new Color(222, 227, 247));

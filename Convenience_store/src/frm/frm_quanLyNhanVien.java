@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.chrono.JapaneseDate;
+import java.util.ArrayList;
 
 import javax.management.modelmbean.ModelMBean;
 import javax.swing.Action;
@@ -33,6 +34,10 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
+
+import dao.dsSanPham;
+import dao.NhanVien_Dao;
+import entity.NhanVien;
 public class frm_quanLyNhanVien extends frm_default implements ActionListener, MouseListener{
 
 	
@@ -53,8 +58,14 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 	private JRadioButton nam,nu;
 	private ButtonGroup group;
 	private JButton btnTim, btnXoa, btnXoarong, btnThem, btnLuu, btnSua;
-	
-	public frm_quanLyNhanVien() {
+	private NhanVien_Dao dao;
+	private NhanVien_Dao ds;
+	private ArrayList<NhanVien> list;
+	public frm_quanLyNhanVien(NhanVien_Dao dao) {
+		
+		this.dao = dao;
+		
+		
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -279,7 +290,8 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 	
 	
 	public static void main(String[] args) {
-		new frm_quanLyNhanVien();
+		NhanVien_Dao dao = new NhanVien_Dao();
+		new frm_quanLyNhanVien(dao);
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -311,10 +323,57 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 		
 	}
 
+	public void themAction() {
+		
+	}
+	public void xoaRongAction() {
+			txtMa.setText("");
+			txtTen.setText("");
+			txtDiaChi.setText("");
+			txtLuong.setText("");
+			txtMaTim.setText("");
+			txtNgaySinh.setText("");
+			txtSdt.setText("");
+			txtNgayVaoLam.setText("");
+			nu.setSelected(true);
+			nam.setSelected(true);
+		}
+	public void xoaAction() {
+		
+	}
+	public void suaAction() {
+		
+	}
+	public void luuAction() {
+		
+	}
+	public void timAction() {
+		
+	}
+
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		Object o = e.getSource();
+		if(o.equals(btnThem)) {
+			themAction();
+		}
+		if(o.equals(btnThem)) {
+			xoaRongAction();
+		}
+		if(o.equals(btnThem)) {
+			xoaAction();
+		}
+		if(o.equals(btnThem)) {
+			suaAction();
+		}
+		if(o.equals(btnThem)) {
+			luuAction();
+		}
+		if(o.equals(btnThem)) {
+			timAction();
+		}
 	}
 
 	
