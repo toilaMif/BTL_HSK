@@ -1,16 +1,17 @@
 package entity;
 
-public class DonGia {
+public class DonGia extends SanPham{
 	private double donGiaNhap;
 	private double donGiaBan;
 	private double donGiaKhuyenMai;
 
-	public DonGia(double donGiaNhap, double donGiaBan, double donGiaKhuyenMai) {
-		super();
-		this.donGiaNhap = donGiaNhap;
-		this.donGiaBan = donGiaBan;
-		this.donGiaKhuyenMai = donGiaKhuyenMai;
-	}
+//	public DonGia(String maSP, String tenSp, String loaiSP, int soLuong, String xuatXu, String thuongHieu, String moTa,
+//			String nhaSanXuat, double donGiaNhap, double donGiaBan, double donGiaKhuyenMai) {
+//		super(maSP, tenSp, loaiSP, soLuong, xuatXu, thuongHieu, moTa, nhaSanXuat, don);
+//		this.donGiaNhap = donGiaNhap;
+//		this.donGiaBan = donGiaBan;
+//		this.donGiaKhuyenMai = donGiaKhuyenMai;
+//	}
 
 	public DonGia() {
 		super();
