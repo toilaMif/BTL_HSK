@@ -12,7 +12,7 @@ import controller.DataBase;
 import entity.Account;
 
 public class Account_Dao implements Serializable{
-	private ArrayList<Account> listAccount;
+	public ArrayList<Account> listAccount;
 	
 	public Account_Dao() {
 		listAccount = new ArrayList<Account>();
@@ -25,13 +25,15 @@ public class Account_Dao implements Serializable{
 		this.listAccount = listAccount;
 	}
 	
+	
+	
 	public ArrayList<Account> getAllAccount() {
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		ArrayList<Account> list=new ArrayList<Account>();
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from Account");
+			ResultSet rs = stmt.executeQuery("select * from TaiKhoan");
 			while(rs.next()) {
 				list.add(new Account(rs.getString(1), rs.getString(2), rs.getString(3)));
 			}
@@ -46,7 +48,7 @@ public class Account_Dao implements Serializable{
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		try {
-			PreparedStatement stmt = con.prepareStatement("select * from Account where userName = ?");
+			PreparedStatement stmt = con.prepareStatement("select * from TaiKhoan where tenNguoiDung = ?");
 			stmt.setString(1, userName);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
@@ -59,28 +61,49 @@ public class Account_Dao implements Serializable{
 		return listAccount;
 	}
 	
-	public boolean create(Account account) {
-		int n = 0;
-		DataBase.getInstance();
-		Connection con = DataBase.getConnection();
-		try {
-			PreparedStatement stmt = con.prepareStatement("insert into Account values (?, ?, ?)");
-			stmt.setString(1, account.getMaTk());
-			stmt.setString(2, account.getTenNguoiDung());
-			stmt.setString(3, account.getMatKhau());
-			n = stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return n != 0;
+	public boolean isUserNameExists(String tenNguoiDung) {
+	    DataBase.getInstance();  // Khởi tạo đối tượng DataBase
+	    Connection con = DataBase.getConnection();  // Lấy kết nối
+	    try {
+	        PreparedStatement stmt = con.prepareStatement("SELECT * FROM TaiKhoan WHERE tenNguoiDung = ?");
+	        stmt.setString(1, tenNguoiDung);
+	        ResultSet rs = stmt.executeQuery();
+	        return rs.next(); 
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false; 
+	}
+	public boolean createAccount(Account account) {
+	    if (isUserNameExists(account.getTenNguoiDung())) {
+	        System.out.println("Tên người dùng đã tồn tại. Không thể thêm tài khoản mới.");
+	        return false; 
+	    }
+	    
+	    int n = 0;
+	    DataBase.getInstance();
+	    Connection con = DataBase.getConnection();
+	    try {
+	        PreparedStatement stmt = con.prepareStatement("INSERT INTO TaiKhoan VALUES (?, ?, ?)");
+	        stmt.setString(1, account.getMaTk());
+	        stmt.setString(2, account.getTenNguoiDung());
+	        stmt.setString(3, account.getMatKhau());
+	        n = stmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return n != 0;
 	}
 	
-	public boolean update(Account account) {
+
+
+	
+	public boolean updateAccount(Account account) {
 		int n = 0;
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		try {
-			PreparedStatement stmt = con.prepareStatement("update Account set userName = ?, password = ? where idAccount = ?");
+			PreparedStatement stmt = con.prepareStatement("update TaiKhoan set tenNguoiDung = ?, matKhau = ? where maTK = ?");
 			stmt.setString(1, account.getTenNguoiDung());
 			stmt.setString(2, account.getMatKhau());
 			stmt.setString(3, account.getMaTk());
@@ -91,12 +114,12 @@ public class Account_Dao implements Serializable{
 		return n != 0;
 	}
 	
-	public boolean delete(Account account) {
+	public boolean deleteAccount(Account account) {
 		int n = 0;
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		try {
-			PreparedStatement stmt = con.prepareStatement("delete from Account where idAccount = ?");
+			PreparedStatement stmt = con.prepareStatement("delete from TaiKhoan where maTK = ?");
 			stmt.setString(1, account.getMaTk());
 			n = stmt.executeUpdate();
 		} catch (SQLException e) {

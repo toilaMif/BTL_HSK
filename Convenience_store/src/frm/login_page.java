@@ -13,23 +13,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.ConnectDB;
+import dao.Account_Dao;
+import entity.Account;
+
 public class login_page extends JFrame implements ActionListener, MouseListener{
 	
-	private JLabel lDangNhap, l_ten_dang_nhap, l_password, imgLabel;
-	private JTextField txtTenDangNhap, txtPassword;
-	private JButton btnDangNhap;
-	private JPanel pWest, pEast;
-	
-	
+	protected JLabel lDangNhap, l_ten_dang_nhap, l_password, imgLabel;
+	protected JTextField txtTenDangNhap, txtPassword;
+	protected JButton btnDangNhap;
+	protected JPanel pWest, pEast;
+	protected Account_Dao listTK;
+	protected ArrayList<Account> listAccount;
 	public login_page(){
+		
+		ConnectDB.getInstance().connect();
+		listTK = new Account_Dao();
+		listAccount = listTK.getAllAccount();
+		
+		listTK.setListAccount(listTK.getListAccount());
 		setResizable(false);
 		pWest = new JPanel();
 		pWest.setPreferredSize(new Dimension(600,500));
@@ -95,6 +108,7 @@ public class login_page extends JFrame implements ActionListener, MouseListener{
 		pEast.add(btnDangNhap, gbcR);
 		add(pEast, BorderLayout.EAST);
 		
+		btnDangNhap.addActionListener(this);
 		
 		setSize(1000,500);
 		setLocationRelativeTo(null);
@@ -140,7 +154,32 @@ public class login_page extends JFrame implements ActionListener, MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		Object o = e.getSource();
+		if(o.equals(btnDangNhap)) {
+			login();
+		}
+	}
+	
+	public void login() {
+		String userName = txtTenDangNhap.getText();
+		String pass = txtPassword.getText();
+		try {
+			Account user = new Account(userName, pass);
+			if(listTK.isUserNameExists(userName)) {
+				new frm_default().setVisible(true);
+				this.dispose();
+			}
+			else {
+				JOptionPane.showMessageDialog(btnDangNhap, "Tài khoản không tồn tại");
+			}
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(btnDangNhap, "Lỗi");
+		}
 		
+	}
+	public void loadUser() {
+		listTK.setListAccount(listTK.getAllAccount());
 	}
 	
 }

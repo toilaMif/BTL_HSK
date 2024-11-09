@@ -190,7 +190,20 @@ public class frm_dsNhanVien extends frm_default implements ActionListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		Object o = e.getSource();
+	    if (o.equals(menuSP)) {
+	        new frm_SanPham();  
+	        this.dispose();     
+	    }else if (o.equals(mnuItemDNTK)) {
+	    	new login_page();
+	    	this.dispose(); 
+	    }else if (o.equals(mnuItemDKTK)) {
+	    	new login_page();
+	    	this.dispose(); 
+	    }else if (o.equals(mnuItemQLSP)) {
+	    	new frm_SanPham();
+	    	this.dispose(); 
+	    }
 	}
 
 }

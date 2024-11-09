@@ -12,14 +12,13 @@ public class testDB {
 		try {
 		    ConnectDB.getInstance().connect();
 		    Connection con = ConnectDB.getConnection();
-		    String sql = "Select * from SanPham";
+		    String sql = "Select * from NhanVien";
 		    Statement statement = con.createStatement();
 		    ResultSet rs = statement.executeQuery(sql);
 		    while (rs.next()) {
 		        System.out.print(rs.getString(1) + "|");
 		        System.out.print(rs.getString(2) + "|");
 		        System.out.print(rs.getString(3) + "|");
-		        System.out.print(rs.getString(4));
 		        System.out.println();
 		        System.out.println("-------------------");
 		    }

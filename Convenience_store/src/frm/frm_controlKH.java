@@ -127,7 +127,7 @@ public class frm_controlKH extends frm_default {
 		
         modeltb = new DefaultTableModel(new String[] {"Mã Khách Hàng","Họ Tên","Ngày sinh","Giới tính","Loại thành viên"},0);
 		table = new JTable(modeltb);
-		table.addMouseListener(this);
+//		table.addMouseListener(this);
 		JScrollPane jS = new JScrollPane(table);
 		tables.add(jS);
 		jS.setBorder(BorderFactory.createLineBorder(Color.RED, 1));

@@ -7,45 +7,57 @@ import java.util.Objects;
 public class NhanVien implements Serializable{
 	private String maNV;
 	private String tenNV;
-	private boolean phai;
 	private LocalDate ngaySinh;
 	private String diaChi;
-	private String sdt;
-	private LocalDate ngayVaoLam;
+	private boolean phai;
 	private double luong;
-	private String account;
-	
+	private LocalDate ngayVaoLam;
+	private String sdt;
+	private String maTK;
 
 	public NhanVien(String maNV) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = "";
-		this.phai = true;
 		this.ngaySinh = LocalDate.now();
 		this.diaChi = "";
-		this.sdt = "";
-		this.ngayVaoLam = LocalDate.now();
+		this.phai = true;
 		this.luong = 0.0;
-		this.account = " ";
+		this.ngayVaoLam = LocalDate.now();
+		this.sdt = "";
+		this.maTK = " ";
 	}
-	public NhanVien(String maNV, String tenNV, boolean phai, LocalDate ngaySinh, String diaChi, String sdt,
-			LocalDate ngayVaoLam, double luong, String account) {
+	
+	
+	
+	public NhanVien(String maNV, String tenNV, LocalDate ngaySinh, String diaChi, boolean phai, double luong,
+			LocalDate ngayVaoLam, String sdt, String maTK) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = tenNV;
-		this.phai = phai;
 		this.ngaySinh = ngaySinh;
 		this.diaChi = diaChi;
-		this.sdt = sdt;
-		this.ngayVaoLam = ngayVaoLam;
+		this.phai = phai;
 		this.luong = luong;
-		this.account = account;
+		this.ngayVaoLam = ngayVaoLam;
+		this.sdt = sdt;
+		this.maTK = maTK;
 	}
+
+
+
 	public String getMaNV() {
 		return maNV;
 	}
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
+	}
+	
+	public String getMaTK() {
+		return maTK;
+	}
+	public void setMaTK(String maTK) {
+		this.maTK = maTK;
 	}
 	public String getTenNV() {
 		return tenNV;
@@ -82,12 +94,6 @@ public class NhanVien implements Serializable{
 	}
 	public void setNgayVaoLam(LocalDate ngayVaoLam) {
 		this.ngayVaoLam = ngayVaoLam;
-	}
-	public String getAccount() {
-		return account;
-	}
-	public void setAccount(String account) {
-		this.account = account;
 	}
 	public double getLuong() {
 		return luong;

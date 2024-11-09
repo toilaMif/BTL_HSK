@@ -16,6 +16,11 @@ public class Account {
 		this.matKhau = "";
 	}
 
+	public Account(String tenNguoiDung, String matKhau) {
+		this.tenNguoiDung = tenNguoiDung;
+		this.matKhau = matKhau;
+	}
+	
 	public Account(String maTk, String tenNguoiDung, String matKhau) {
 		super();
 		this.maTk = maTk;
@@ -44,7 +49,7 @@ public class Account {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(maTk);
+		return Objects.hash(tenNguoiDung);
 	}
 
 	@Override
@@ -56,7 +61,7 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
-		return Objects.equals(maTk, other.maTk);
+		return Objects.equals(tenNguoiDung, other.tenNguoiDung);
 	}
 	
 	
