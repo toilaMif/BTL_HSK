@@ -28,45 +28,45 @@ import javax.swing.event.MenuListener;
 
 public class frm_default extends JFrame implements ActionListener{
 
-	private JMenuBar menubar;
-	private JMenu menuNV;
+	public JMenuBar menubar;
+	public JMenu menuNV;
 	public JPanel jpCen;
-	private JMenu menuSP;
-	private JMenu menuKH;
-	private JMenu menuHD;
-	private JMenu menuDM;
-	private JMenu menuTK;
-	private JMenu menuDNTK;
-	private JPanel jpTitle;
+	public JMenu menuSP;
+	public JMenu menuKH;
+	public JMenu menuHD;
+	public JMenu menuDM;
+	public JMenu menuTK;
+	public JMenu menuDNTK;
+	public JPanel jpTitle;
 	public JLabel jlTitle;
-	private JMenuItem mnuItem1;
-	private JMenuItem mnuItem3;
-	private JMenuItem mnuItem4;
-	private JMenuItem mnuItem6;
-	private JMenuItem mnuItem8;
-	private JMenuItem mnuItem10;
-	private JMenuItem mnuItem9;
-	private JMenuItem mnuItem7;
-	private JMenuItem mnuItem5;
-	private JMenuItem mnuItem2;
-	private JMenuItem mnuItem11;
-	private JMenuItem mnuItem12;
-	private JMenuItem mnuItem13;
-	private JMenuItem mnuItemDKTK;
-	private JMenuItem mnuItemDNTK;
-	private JMenuItem mnuItemBanHang;
-	private JMenuItem mnuItemQLSP;
-	private JMenuItem mnuItemQLNX;
-	private JMenuItem mnuItemQLHTK;
-	private JMenuItem mnuItemQLHD;
-	private JMenuItem mnuItemQLNV;
-	private JMenuItem mnuItemQLTK;
-	private JMenuItem mnuItemQLKH;
-	private JMenuItem mnuItemQLKM;
-	private JMenuItem mnuItemQLBC;
-	private JMenuItem mnuItemTKSP;
-	private JMenuItem mnuItemTKKH;
-	private JMenuItem mnuItemTKDT;
+	public JMenuItem mnuItem1;
+	public JMenuItem mnuItem3;
+	public JMenuItem mnuItem4;
+	public JMenuItem mnuItem6;
+	public JMenuItem mnuItem8;
+	 public JMenuItem mnuItem10;
+	 public JMenuItem mnuItem9;
+	 public JMenuItem mnuItem7;
+	 public JMenuItem mnuItem5;
+	 public JMenuItem mnuItem2;
+	 public JMenuItem mnuItem11;
+	 public JMenuItem mnuItem12;
+	 public JMenuItem mnuItem13;
+	 public JMenuItem mnuItemDKTK;
+	 public JMenuItem mnuItemDNTK;
+	 public JMenuItem mnuItemBanHang;
+	 public JMenuItem mnuItemQLSP;
+	 public JMenuItem mnuItemQLNX;
+	 public JMenuItem mnuItemQLHTK;
+	 public JMenuItem mnuItemQLHD;
+	 public JMenuItem mnuItemQLNV;
+	 public JMenuItem mnuItemQLTK;
+	 public JMenuItem mnuItemQLKH;
+	 public JMenuItem mnuItemQLKM;
+	 public JMenuItem mnuItemQLBC;
+	 public JMenuItem mnuItemTKSP;
+	 public JMenuItem mnuItemTKKH;
+	 public JMenuItem mnuItemTKDT;
 
 
 	public frm_default() {
@@ -335,6 +335,7 @@ public class frm_default extends JFrame implements ActionListener{
 		menuDNTK.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
 		menuDNTK.setIcon(new ImageIcon(getClass().getResource("/image/ICONTK.png")));
 		menubar.add(menuDNTK);
+		
 		
 				//Item Dang Nhap
 				mnuItemDNTK = new JMenuItem("Đăng Nhập");    

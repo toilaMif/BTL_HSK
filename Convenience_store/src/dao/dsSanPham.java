@@ -2,6 +2,8 @@ package dao;
 
 import java.awt.image.SampleModel;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import entity.SanPham;
 
@@ -57,5 +59,13 @@ public class dsSanPham {
 		return dsSP.get(i);
 		
 	}
+	public SanPham TimSP(String masp) {
+		SanPham sp1 = new SanPham(masp);
+		if(dsSP.contains(sp1))
+			return dsSP.get(dsSP.indexOf(sp1));
+		return null;
+		
+	}
+	
 
 }
