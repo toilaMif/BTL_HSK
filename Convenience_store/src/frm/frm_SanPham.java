@@ -3,12 +3,14 @@ package frm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.Panel;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
@@ -22,11 +24,15 @@ import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -95,6 +101,29 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 	private Box b2;
 	private JLabel imgksp;
 	private JPanel bkhungtt;
+	private JButton jbtTim;
+	private JTextField jtfTim;
+	private JPanel b21;
+	private JPanel b11;
+	private JRadioButton jrbSLTang;
+	private JRadioButton jrbSLGiam;
+	private JComboBox<String> jcbLocXX;
+	private JComboBox<String> jcbLocTH;
+	private JPanel b211;
+	private JPanel b212;
+	private JPanel b213;
+	private ButtonGroup groupSL;
+	private ButtonGroup groupDG;
+	private JComboBox<String> jcboxSapxep;
+	private JRadioButton jrbBehon;
+	private JRadioButton jrbLonhon;
+	private JCheckBox jcbDG;
+	private JCheckBox jcbSL;
+	private JLabel jlNhapSo;
+	private JTextField jtfNhapSo;
+	private Box b2131;
+	private Box b2132;
+	private Box b2133;
 
 	public frm_SanPham() {
 		super();
@@ -217,6 +246,110 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 
 		jbTT2 = new JPanel();
 		jbTT2.setBackground(Color.gray);
+		jbTT2.setLayout(new BorderLayout());
+		
+		b11 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		b11.setBackground(Color.gray);
+		
+		b21 = new JPanel(new GridLayout(1,3,5,5));
+		b21.setBackground(Color.gray);
+		b211 = new JPanel(new BorderLayout());
+		b211.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white),
+				"Sắp Xếp", 0, 0, fnTitle, Color.white));
+		b212 =new JPanel(new GridLayout(2,1,5,5));
+		b212.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white),
+				"Lọc Thương Hiệu - Xuất Xứ", 0, 0, fnTitle, Color.white));
+		b213 = new JPanel(new BorderLayout());
+		b213.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.white),
+				"Lọc Số Lượng - Đơn Giá", 0, 0, fnTitle, Color.white));
+		
+		b211.setBackground(Color.gray);
+		b212.setBackground(Color.gray);
+		b213.setBackground(Color.gray);
+		
+		b2131 = Box.createHorizontalBox();
+		b2132 = Box.createHorizontalBox();
+		b2133 = Box.createHorizontalBox();
+		
+		
+		jbtTim = new JButton("Tìm Kiếm Theo Mã");
+		jbtTim.setPreferredSize(new Dimension(150,25));
+		jtfTim = new JTextField();
+		jtfTim.setPreferredSize(new Dimension(400,25));
+		
+		b11.add(jbtTim);
+		b11.add(jtfTim);
+		
+		String [] jcbSapxep = {"Số Lượng", "Đơn Giá",};
+		jcboxSapxep = new JComboBox<String>(jcbSapxep);
+		jcboxSapxep.setPreferredSize(new Dimension(100,25));
+		
+		
+		jrbSLTang = new JRadioButton("Tăng");
+		jrbSLTang.setForeground(Color.white);
+		jrbSLTang.setBackground(Color.gray);
+		jrbSLGiam = new JRadioButton("Giảm");
+		jrbSLGiam.setBackground(Color.gray);
+		jrbSLGiam.setForeground(Color.white);
+		groupSL = new ButtonGroup();
+		groupSL.add(jrbSLTang);
+		groupSL.add(jrbSLGiam);
+		
+		String [] jcbXuatxu = {"Xuất xứ", "Việt Nam",};
+		jcbLocXX = new JComboBox<String>(jcbXuatxu);
+		
+		String [] jcbThuonghieu = {"Thương Hiệu", "Việt Nam",};
+		jcbLocTH = new JComboBox<String>(jcbThuonghieu);
+		
+		jcbSL = new JCheckBox("Số Lượng");
+		jcbSL.setBackground(Color.gray);
+		jcbSL.setForeground(Color.white);
+		jcbDG = new JCheckBox("Đơn Giá");
+		jcbDG.setBackground(Color.gray);
+		jcbDG.setForeground(Color.white);
+		
+		jlNhapSo = new JLabel("Nhập Số:      ");
+		jlNhapSo.setForeground(Color.white);
+		jtfNhapSo = new JTextField();
+			
+		jrbLonhon = new JRadioButton("Lớn Hơn");
+		jrbLonhon.setBackground(Color.gray);
+		jrbLonhon.setForeground(Color.white);
+		jrbBehon = new JRadioButton("Bé Hơn");
+		jrbBehon.setForeground(Color.white);
+		jrbBehon.setBackground(Color.gray);
+		groupDG = new ButtonGroup();
+		groupDG.add(jrbLonhon);
+		groupDG.add(jrbBehon);
+		
+		b211.add(jcboxSapxep, BorderLayout.NORTH);
+		b211.add(jrbSLTang, BorderLayout.CENTER);
+		b211.add(jrbSLGiam, BorderLayout.EAST);
+		
+		b212.add(jcbLocXX);
+		b212.add(jcbLocTH);
+		
+		b2131.add(jcbSL);
+		b2131.add(jcbDG);
+		
+		b2132.add(jlNhapSo);
+		b2132.add(jtfNhapSo);
+		
+		b2133.add(jrbLonhon);
+		b2133.add(jrbBehon);
+		
+		b213.add(b2131, BorderLayout.NORTH);
+		b213.add(b2132, BorderLayout.CENTER);
+		b213.add(b2133, BorderLayout.SOUTH);
+		
+		b21.add(b211);
+		b21.add(b212);
+		b21.add(b213);
+		
+		jbTT2.add(b11, BorderLayout.NORTH);
+		jbTT2.add(b21, BorderLayout.CENTER);
+		
+		
 
 		split.add(jbTT1);
 		split.add(jbTT2);
@@ -420,6 +553,7 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		super.actionPerformed(e);
 		Object o = e.getSource();
 		if (o.equals(jbtnThoat)) {
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -440,6 +574,9 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		} else if (o.equals(jbtnXoarong)) {
 			xoarong();
 		}
+		
+		
+		
 
 	}
 

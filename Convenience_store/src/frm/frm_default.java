@@ -44,29 +44,30 @@ public class frm_default extends JFrame implements ActionListener{
 	public JMenuItem mnuItem4;
 	public JMenuItem mnuItem6;
 	public JMenuItem mnuItem8;
-	public JMenuItem mnuItem10;
-	public JMenuItem mnuItem9;
-	public JMenuItem mnuItem7;
-	public JMenuItem mnuItem5;
-	public JMenuItem mnuItem2;
-	public JMenuItem mnuItem11;
-	public JMenuItem mnuItem12;
-	public JMenuItem mnuItem13;
-	public JMenuItem mnuItemDKTK;
-	public JMenuItem mnuItemDNTK;
-	public JMenuItem mnuItemBanHang;
-	public JMenuItem mnuItemQLSP;
-	public JMenuItem mnuItemQLNX;
-	public JMenuItem mnuItemQLHTK;
-	public JMenuItem mnuItemQLHD;
-	public JMenuItem mnuItemQLNV;
-	public JMenuItem mnuItemQLTK;
-	public JMenuItem mnuItemQLKH;
-	public JMenuItem mnuItemQLKM;
-	public JMenuItem mnuItemQLBC;
-	public JMenuItem mnuItemTKSP;
-	public JMenuItem mnuItemTKKH;
-	public JMenuItem mnuItemTKDT;
+	 public JMenuItem mnuItem10;
+	 public JMenuItem mnuItem9;
+	 public JMenuItem mnuItem7;
+	 public JMenuItem mnuItem5;
+	 public JMenuItem mnuItem2;
+	 public JMenuItem mnuItem11;
+	 public JMenuItem mnuItem12;
+	 public JMenuItem mnuItem13;
+	 public JMenuItem mnuItemDKTK;
+	 public JMenuItem mnuItemDNTK;
+	 public JMenuItem mnuItemBanHang;
+	 public JMenuItem mnuItemQLSP;
+	 public JMenuItem mnuItemQLNX;
+	 public JMenuItem mnuItemQLHTK;
+	 public JMenuItem mnuItemQLHD;
+	 public JMenuItem mnuItemQLNV;
+	 public JMenuItem mnuItemQLTK;
+	 public JMenuItem mnuItemQLKH;
+	 public JMenuItem mnuItemQLKM;
+	 public JMenuItem mnuItemQLBC;
+	 public JMenuItem mnuItemTKSP;
+	 public JMenuItem mnuItemTKKH;
+	 public JMenuItem mnuItemTKDT;
+
 
 
 	public frm_default() {
@@ -376,12 +377,14 @@ public class frm_default extends JFrame implements ActionListener{
 		mnuItemQLSP.addActionListener(this);
 		mnuItemDKTK.addActionListener(this);
 		mnuItemDNTK.addActionListener(this);
+
 		setVisible(true);
 	}
 	
 	public static void main(String[] args) {
 		new frm_default();
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	    Object o = e.getSource();
@@ -397,6 +400,7 @@ public class frm_default extends JFrame implements ActionListener{
 	    }else if (o.equals(mnuItemQLSP)) {
 	    	new frm_SanPham();
 	    	this.dispose(); 
+
 	    }
 	}
 
@@ -405,3 +409,4 @@ public class frm_default extends JFrame implements ActionListener{
 
 
 }
+
