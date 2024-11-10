@@ -5,53 +5,31 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDate;
 import java.time.chrono.JapaneseDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javax.management.modelmbean.ModelMBean;
-import javax.swing.Action;
-import javax.swing.JFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.*;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
+import controller.ConnectDB;
 import dao.dsSanPham;
 import dao.NhanVien_Dao;
 import entity.NhanVien;
 public class frm_quanLyNhanVien extends frm_default implements ActionListener, MouseListener{
 
-	
-	private JMenuBar menubar;
-	private JMenu menuNV;
-	private JPanel jpCen;
-	private JMenu menuSP;
-	private JMenu menuKH;
-	private JMenu menuHD;
-	private JMenu menuDM;
-	private JMenu menuTK;
-	private JMenu menuDNTK;
 	private JPanel jpTitle;
-	private JLabel jlTitle;
 	private JTable table_nhanvien;
 	private DefaultTableModel model_tableNV;
 	private JTextField txtMa, txtTen, txtDiaChi, txtSdt,txtMaTim, txtNgaySinh, txtNgayVaoLam, txtLuong;
@@ -61,88 +39,13 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 	private NhanVien_Dao dao;
 	private NhanVien_Dao ds;
 	private ArrayList<NhanVien> list;
-	public frm_quanLyNhanVien(NhanVien_Dao dao) {
-		
-		this.dao = dao;
-		
-		
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		//Phần center
-		jpCen = new JPanel();
-		jpCen.add(Box.createHorizontalGlue());
-		jpCen.setBackground(Color.gray);
-
-//		Menu
-		menubar = new JMenuBar();
-		menubar.setBackground(new Color(163, 184, 204));
-		menubar.setLayout(new BoxLayout(menubar, BoxLayout.X_AXIS));
-		setJMenuBar(menubar);
-
-		menuNV = new JMenu("Nhân Viên");
-		menuNV.setForeground(Color.WHITE);
-		menuNV.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
-		menuNV.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
-		menuNV.setIcon(new ImageIcon(getClass().getResource("/image/NV.png")));
-		menubar.add(menuNV);
-		
-		menuKH = new JMenu("Khách Hàng");
-		menuKH.setForeground(Color.WHITE);
-		menuKH.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
-		menuKH.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
-		menuKH.setIcon(new ImageIcon(getClass().getResource("/image/KH.png")));
-		menubar.add(menuKH);
-		
-		menuSP = new JMenu("Sản Phẩm");
-		menuSP.setForeground(Color.WHITE);
-		menuSP.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
-		menuSP.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
-		menuSP.setIcon(new ImageIcon(getClass().getResource("/image/SP.png")));
-		menubar.add(menuSP);
-		
-		menuDM = new JMenu("Danh Mục");
-		menuDM.setForeground(Color.WHITE);
-		menuDM.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
-		menuDM.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
-		menuDM.setIcon(new ImageIcon(getClass().getResource("/image/DM.png")));
-		menubar.add(menuDM);
-		
-		menuHD = new JMenu("Hóa Đơn");
-		menuHD.setForeground(Color.WHITE);
-		menuHD.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
-		menuHD.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
-		menuHD.setIcon(new ImageIcon(getClass().getResource("/image/HD.png")));
-		menubar.add(menuHD);
-		
-		menuTK = new JMenu("Thống Kê");
-		menuTK.setForeground(Color.WHITE);
-		menuTK.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
-		menuTK.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
-		menuTK.setIcon(new ImageIcon(getClass().getResource("/image/TK.png")));
-		menubar.add(menuTK);
-		
-		
-		menubar.add(Box.createHorizontalStrut(680));
-		
-		menuDNTK = new JMenu("Đăng Nhập");
-		menuDNTK.setForeground(Color.WHITE);
-		menuDNTK.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
-		menuDNTK.setIcon(new ImageIcon(getClass().getResource("/image/ICONTK.png")));
-		menubar.add(menuDNTK);
-
-		
-		jpTitle = new JPanel();
-		jpTitle.setBackground(null);
-//		jpTitle.setBorder(BorderFactory.createLineBorder(Color.white));
-		jpTitle.setPreferredSize(new Dimension(1000, 60));
-		jlTitle = new JLabel("Cửa Hàng Tiện lợi");
-		Font fn = new Font("Times New Roman", Font.BOLD + Font.ITALIC, 50);
-		jlTitle.setFont(fn);
-		jlTitle.setForeground(Color.WHITE);
-		jpTitle.add(jlTitle);
-		jpCen.add(jpTitle);
+	private String ma_login;
+	frm_quanLyNhanVien(String maLogin) {
+		super();
+		ConnectDB.getInstance().connect();
+		ds = new NhanVien_Dao();
+		list = ds.getAllNV();
+		jlTitle.setText("Quản lý nhân viên");
 				
 
 		JPanel pQuanly = new JPanel();
@@ -282,16 +185,47 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 		JScrollPane scroll = new JScrollPane(table_nhanvien);
 		scroll.setPreferredSize(new Dimension(1000,500));
 		jpCen.add(scroll);
+		
+		btnLuu.addActionListener(this);
+		btnThem.addActionListener(this);
+		btnSua.addActionListener(this);
+		btnXoarong.addActionListener(this);
+		btnXoa.addActionListener(this);
+		btnTim.addActionListener(this);
 		add(jpCen, BorderLayout.CENTER);
 		
-
+		menuDNTK.setText(maLogin);
+		hienTable();
 		setVisible(true);
 	}
 	
 	
+	private void hienTable() {
+	    NhanVien_Dao nhanVienDao = new NhanVien_Dao();
+	    ArrayList<NhanVien> employees = nhanVienDao.getAllNV();
+
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	    // Clear existing data
+	    model_tableNV.setRowCount(0);
+
+	    for (NhanVien nv : employees) {
+	        model_tableNV.addRow(new Object[] {
+	            nv.getMaNV(),
+	            nv.getTenNV(),
+	            nv.getNgaySinh().format(formatter),
+	            nv.getDiaChi(),
+	            nv.isPhai() ? "Nữ" : "Nam",
+	            nv.getLuong(),
+	            nv.getNgayVaoLam().format(formatter),
+	            nv.getSdt()
+	        });
+	    }
+	}
+
 	public static void main(String[] args) {
 		NhanVien_Dao dao = new NhanVien_Dao();
-		new frm_quanLyNhanVien(dao);
+		new frm_quanLyNhanVien("1");
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -339,7 +273,55 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 			nam.setSelected(true);
 		}
 	public void xoaAction() {
-		
+		try {
+            String maNV = txtMa.getText();
+            String tenNV = txtTen.getText();
+            String ngaySinhStr = txtNgaySinh.getText();
+            String diaChi = txtDiaChi.getText();
+            Boolean phai = nu.isSelected();
+            double luong = Double.parseDouble(txtLuong.getText());
+            String ngayVaoLamStr = txtNgayVaoLam.getText();
+            String sdt = txtSdt.getText();
+            String maTK = ma_login;
+            
+            // Initialize DAO and check if the employee already exists
+            NhanVien_Dao nhanVienDao = new NhanVien_Dao();
+            if (nhanVienDao.ismaNV(maNV)) {
+                JOptionPane.showMessageDialog(this, "Nhân viên với mã " + maNV + " đã tồn tại!");
+                return;
+            }
+            
+            // Parse dates with a formatter
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate ngaySinh = LocalDate.parse(ngaySinhStr, formatter);
+            LocalDate ngayVaoLam = LocalDate.parse(ngayVaoLamStr, formatter);
+
+            // Add new employee data to the table
+            model_tableNV.addRow(new Object[] {
+                maNV,          // Mã nhân viên
+                tenNV,         // Tên nhân viên
+                phai ? "Nữ" : "Nam", // Phái (display as "Nam" or "Nữ")
+                ngaySinh,   // Ngày sinh
+                diaChi,        // Địa chỉ
+                sdt,           // Số điện thoại
+                ngayVaoLam, // Ngày vào làm
+                luong          // Lương
+            });
+
+            // Clear input fields after successful addition
+            txtMa.setText("");
+            txtTen.setText("");
+            txtNgaySinh.setText("");
+            txtDiaChi.setText("");
+            txtLuong.setText("");
+            txtNgayVaoLam.setText("");
+            txtSdt.setText("");
+            group.clearSelection();
+            JOptionPane.showMessageDialog(btnThem, "Thêm nhân viên thành công");
+        } catch (DateTimeParseException ex) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày tháng theo định dạng dd/MM/yyyy!", "Input Error", JOptionPane.WARNING_MESSAGE);
+            ex.printStackTrace();
+        }
 	}
 	public void suaAction() {
 		
@@ -350,7 +332,6 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 	public void timAction() {
 		
 	}
-
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -374,6 +355,19 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 		if(o.equals(btnThem)) {
 			timAction();
 		}
+		else if (o.equals(menuSP)) {
+	        new frm_SanPham();  
+	        this.dispose();     
+	    }else if (o.equals(mnuItemDNTK)) {
+	    	new login_page();
+	    	this.dispose(); 
+	    }else if (o.equals(mnuItemDKTK)) {
+	    	new login_page();
+	    	this.dispose(); 
+	    }else if (o.equals(mnuItemQLSP)) {
+	    	new frm_SanPham();
+	    	this.dispose(); 
+	    }
 	}
 
 	

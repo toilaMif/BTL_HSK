@@ -48,7 +48,7 @@ public class NhanVien_Dao implements Serializable{
 				Boolean phai = rs.getBoolean(3);
 				LocalDate birthDay = rs.getDate(4).toLocalDate();
 				String address = rs.getString(5);
-				String phone = rs.getString(6);
+				String phone = rs.getString(6);	
 				LocalDate ngayVaolam = rs.getDate(7).toLocalDate();
 				Double salary = rs.getDouble(8);
 				String maTK = rs.getString(9);
@@ -131,15 +131,14 @@ public class NhanVien_Dao implements Serializable{
 		DataBase.getInstance();
 		Connection con = DataBase.getConnection();
 		try {
-			PreparedStatement stmt = con.prepareStatement("UPDATE NhanVien set tenNV = ?, ngaySinh = ?, diaChi = ?, gioiTinh = ?, luong = ?, ngayVaoLam = ?, sdt = ? , maTK = ? WHERE maNV = ?");
-			stmt.setString(2, nv.getTenNV());
-			stmt.setBoolean(3, nv.isPhai());
-			stmt.setDate(4, Date.valueOf(nv.getNgaySinh()));
-			stmt.setString(5,nv.getDiaChi());
-			stmt.setString(6, nv.getSdt());
-			stmt.setDate(7, Date.valueOf(nv.getNgayVaoLam()));
-			stmt.setDouble(8, nv.getLuong());
-			stmt.setString(9, nv.getMaTK());
+			PreparedStatement stmt = con.prepareStatement("UPDATE NhanVien set tenNV = ?, ngaySinh = ?, diaChi = ?, gioiTinh = ?, luong = ?, ngayVaoLam = ?, sdt = ? WHERE maNV = ?");
+			stmt.setString(1, nv.getTenNV());
+			stmt.setBoolean(2, nv.isPhai());
+			stmt.setDate(3, Date.valueOf(nv.getNgaySinh()));
+			stmt.setString(4,nv.getDiaChi());
+			stmt.setString(5, nv.getSdt());
+			stmt.setDate(6, Date.valueOf(nv.getNgayVaoLam()));
+			stmt.setDouble(7, nv.getLuong());
 			n = stmt.executeUpdate();
 		}catch (SQLException e) {
 			e.printStackTrace();

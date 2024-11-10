@@ -30,6 +30,7 @@ import entity.Account;
 
 public class login_page extends JFrame implements ActionListener, MouseListener{
 	
+	public String maTK_login;
 	protected JLabel lDangNhap, l_ten_dang_nhap, l_password, imgLabel;
 	protected JTextField txtTenDangNhap, txtPassword;
 	protected JButton btnDangNhap;
@@ -161,12 +162,15 @@ public class login_page extends JFrame implements ActionListener, MouseListener{
 	}
 	
 	public void login() {
+	
 		String userName = txtTenDangNhap.getText();
 		String pass = txtPassword.getText();
 		try {
 			Account user = new Account(userName, pass);
 			if(listTK.isUserNameExists(userName)) {
-				new frm_default().setVisible(true);
+				JOptionPane.showMessageDialog(btnDangNhap, "Đăng nhập thành công");
+				maTK_login = userName;
+				new frm_quanLyNhanVien(maTK_login).setVisible(true);
 				this.dispose();
 			}
 			else {

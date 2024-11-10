@@ -44,6 +44,18 @@ public class NhanVien implements Serializable{
 		this.maTK = maTK;
 	}
 
+	public NhanVien(String maNV, String tenNV, LocalDate ngaySinh, String diaChi, boolean phai, double luong,
+			LocalDate ngayVaoLam, String sdt) {
+		super();
+		this.maNV = maNV;
+		this.tenNV = tenNV;	
+		this.ngaySinh = ngaySinh;
+		this.diaChi = diaChi;
+		this.phai = phai;
+		this.luong = luong;
+		this.ngayVaoLam = ngayVaoLam;
+		this.sdt = sdt;
+	}
 
 
 	public String getMaNV() {

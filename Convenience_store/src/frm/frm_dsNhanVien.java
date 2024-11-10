@@ -10,6 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -17,6 +22,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -27,6 +33,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import dao.NhanVien_Dao;
+import entity.NhanVien;
+import frm.login_page;
 
 public class frm_dsNhanVien extends frm_default implements ActionListener, MouseListener{
 
@@ -145,11 +153,32 @@ public class frm_dsNhanVien extends frm_default implements ActionListener, Mouse
         pCenter.add(bTTNV);
         pCenter.add(scroll);
         add(pCenter, BorderLayout.CENTER);
+        hienTable();
 		//jpCen 
 		setSize(500,500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
+	}
+	
+	private void hienTable() {
+	    NhanVien_Dao nhanVienDao = new NhanVien_Dao();
+	    ArrayList<NhanVien> employees = nhanVienDao.getAllNV();
+
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	    for (NhanVien nv : employees) {
+	        model_tableNV.addRow(new Object[] {
+	            nv.getMaNV(),
+	            nv.getTenNV(),
+	            nv.isPhai() ? "Nữ" : "Nam",
+	            nv.getNgaySinh().format(formatter),
+	            nv.getDiaChi(),
+	            nv.getSdt(),
+	            nv.getNgayVaoLam().format(formatter),
+	            nv.getLuong()
+	        });
+	    }
 	}
 	
 	
