@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4eeac106-bfb7-44b6-ad28-3bbe7fff7b2a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ConvenienceStore.sql" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ConvenienceStore.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/controller/ConnectDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/controller/ConnectDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/dao/dsSanPham.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/dao/dsSanPham.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/dao/quanLyNhanVien.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/dao/quanLyNhanVien.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/entity/ChuongTrinhKhuyenMai.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/entity/ChuongTrinhKhuyenMai.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/entity/DaySanPham.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/entity/DaySanPham.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/entity/DonGia.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/entity/DonGia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/entity/SanPham.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/entity/SanPham.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/frm/frm_SanPham.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/frm/frm_SanPham.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/frm/frm_default.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/frm/frm_default.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/testDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/testDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/ConvenienceStore.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/ConvenienceStore.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ConnectDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConnectDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/HoaDon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/HoaDon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/KhachHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/KhachHang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/NhanVien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/NhanVien.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frm/frm_controlKH.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frm/frm_controlKH.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frm/frm_default.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frm/frm_default.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2oVtt4L99othYTL0KtGhLq1CCyj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ASUS/Desktop/Khoadihoc/HK4/LTHSK_Java/BTL_HSK/Convenience_store"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4eeac106-bfb7-44b6-ad28-3bbe7fff7b2a" name="Changes" comment="" />
+      <created>1730966781917</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730966781917</updated>
+    </task>
+    <servers />
+  </component>
+</project>
