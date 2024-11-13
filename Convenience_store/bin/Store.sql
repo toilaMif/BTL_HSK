@@ -141,3 +141,53 @@ BEGIN
     WHERE maSP = @maSP;
     
 END;
+
+-- lọc Xuất Xứ
+CREATE PROCEDURE sp_LocSanPhamTheoXuatXu
+    @xuatXu NVARCHAR(50)
+AS
+BEGIN
+    SELECT *
+    FROM SanPham
+    WHERE xuatXu = @xuatXu;
+END;
+
+-- lọc Thương hiệu
+CREATE PROCEDURE sp_LocSanPhamTheoThuonghieu 
+    @thuongHieu NVARCHAR(50)
+AS
+BEGIN
+    SELECT *
+    FROM SanPham
+    WHERE thuongHieu = @thuongHieu;
+END;
+
+--Xóa sản phẩm
+CREATE PROCEDURE sp_XoaSanPhamTheoMa
+    @maSP VARCHAR(10)
+AS
+BEGIN
+    DELETE FROM SanPham
+    WHERE maSP = @maSP;
+END;
+  --lọc số lương
+  CREATE PROCEDURE sp_LocSanPhamTheoSoLuong
+    @soLuong INT,
+    @operator INT -- Nhận giá trị 1 hoặc 2 để lọc
+AS
+BEGIN
+    IF @operator = 1
+    BEGIN
+        SELECT *
+        FROM SanPham
+        WHERE soLuong > @soLuong;
+    END
+    ELSE IF @operator = 2
+    BEGIN
+        SELECT *
+        FROM SanPham
+        WHERE soLuong < @soLuong;
+    END
+
+    
+END;	

@@ -581,86 +581,113 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		super.actionPerformed(e);
-		Object o = e.getSource();
+	    super.actionPerformed(e);
+	    Object o = e.getSource();
 
-		String selected = (String) jcboxSapxep.getSelectedItem();
-		String selectedXuatXu = jcbLocXX.getSelectedItem().toString();
-		String selectedThuonghieu = jcbLocTH.getSelectedItem().toString();
+	    String selected = (String) jcboxSapxep.getSelectedItem();
+	    String selectedXuatXu = jcbLocXX.getSelectedItem().toString();
+	    String selectedThuonghieu = jcbLocTH.getSelectedItem().toString();
 
-		if (o.equals(jbtnThoat)) {
-			setDefaultCloseOperation(EXIT_ON_CLOSE);
-			setVisible(false);
-			this.dispose();
-		} else if (o.equals(jbtnLuu)) {
-			luu(dsSp);
-		} else if (o.equals(jbtnThem)) {
-			them();
-		} else if (o.equals(jbtnQL)) {
-			new frm_BanHang();
-			this.dispose();
-		} else if (o.equals(jbtnChiTiec)) {
-			int row = table.getSelectedRow();
-			if (row != -1) {
-				String maSP = (table.getValueAt(row, 0) + "");
-				new frm_CTSP(maSP);
-			} else {
-				JOptionPane.showMessageDialog(null, "Chưa chọn Sản Phẩm");
-			}
+	    // Thoát ứng dụng
+	    if (o.equals(jbtnThoat)) {
+	        setDefaultCloseOperation(EXIT_ON_CLOSE);
+	        setVisible(false);
+	        this.dispose();
+	    } else if (o.equals(jbtnLuu)) {
+	        luu(dsSp);
+	    } else if (o.equals(jbtnThem)) {
+	        them();
+	    } else if (o.equals(jbtnQL)) {
+	        new frm_BanHang();
+	        this.dispose();
+	    } else if (o.equals(jbtnChiTiec)) {
+	        int row = table.getSelectedRow();
+	        if (row != -1) {
+	            String maSP = (table.getValueAt(row, 0) + "");
+	            new frm_CTSP(maSP);
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Chưa chọn Sản Phẩm");
+	        }
+	    } else if (o.equals(jbtnSua)) {
+	        sua();
+	    } else if (o.equals(jbtnXoa)) {
+	        xoa();
+	    } else if (o.equals(jbtnXoarong)) {
+	        xoarong();
+	    } else if (o.equals(jbtTim)) {
+	        String masp = jtfTim.getText();
+	        TimSPTheoMa(masp);
+	    } else {
+	        // Lọc theo Số Lượng
+	        if ("Số Lượng".equals(selected)) {
+	            if (jrbSLTang.isSelected()) {
+	                sapxep("{CALL GetSanPhamSorted(?)}", "ASC");
+	            } else if (jrbSLGiam.isSelected()) {
+	                sapxep("{CALL GetSanPhamSorted(?)}", "DESC");
+	            }
+	        }
 
-		} else if (o.equals(jbtnSua)) {
-			sua();
-		} else if (o.equals(jbtnXoa)) {
-			xoa();
-		} else if (o.equals(jbtnXoarong)) {
-			xoarong();
-		} else if (o.equals(jbtTim)) {
-			String masp = jtfTim.getText();
-			TimSPTheoMa(masp);
-		} else {
-			if ("Số Lượng".equals(selected)) {
-				if (jrbSLTang.isSelected()) {
-					sapxep("{CALL GetSanPhamSorted(?)}", "ASC");
-				} else if (jrbSLGiam.isSelected()) {
-					sapxep("{CALL GetSanPhamSorted(?)}", "DESC");
-				}
+	        // Lọc theo Đơn Giá
+	        if ("Đơn Giá".equals(selected)) {
+	            if (jrbSLTang.isSelected()) {
+	                sapxep("{CALL SapxepDonGia(?)}", "ASC");
+	            } else if (jrbSLGiam.isSelected()) {
+	                sapxep("{CALL SapxepDonGia(?)}", "DESC");
+	            }
+	        }
 
-			}
-			if ("Đơn Giá".equals(selected)) {
-				if (jrbSLTang.isSelected()) {
-					sapxep("{CALL SapxepDonGia(?)}", "ASC");
-				} else if (jrbSLGiam.isSelected()) {
-					sapxep("{CALL SapxepDonGia(?)}", "DESC");
-				}
+	        // Lọc theo Xuất Xứ và Thương Hiệu
+	        if (!selectedXuatXu.equals("xuatXu")) {
+	            locXuatxu("{CALL sp_LocSanPhamTheoXuatXu(?)}", selectedXuatXu);
+	            if (!selectedThuonghieu.equals("thuongHieu")) {
+	                locXuatxu("{CALL sp_LocSanPhamTheoThuonghieu(?)}", selectedThuonghieu);
+	            }
+	        }
 
-			}
+	        // Lọc theo Số Lượng
+	        if (jcbSL.isSelected()) {
+	            String input = jtfNhapSo.getText().trim();
+	            if (!input.isEmpty()) {
+	                try {
+	                    int soluong = Integer.parseInt(input);
+	                    if (jrbLonhon.isSelected()) {
+	                        locSoLuong("{CALL sp_LocSanPhamTheoSoLuong(?, ?)}", soluong, 1);
+	                    } else if (jrbBehon.isSelected()) {
+	                        locSoLuong("{CALL sp_LocSanPhamTheoSoLuong(?, ?)}", soluong, 2);
+	                    }
+	                } catch (NumberFormatException ex) {
+	                    JOptionPane.showMessageDialog(null, "Vui lòng nhập một số hợp lệ cho số lượng.");
+	                }
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Vui lòng nhập số lượng.");
+	            }
+	        }
+	        if (jcbDG.isSelected()) {
+	            String input = jtfNhapSo.getText().trim();
+	            if (!input.isEmpty()) {
+	                try {
+	                    int soluong = Integer.parseInt(input);
+	                    if (jrbLonhon.isSelected()) {
+	                        locSoLuong("{CALL sp_LocSanPhamTheoDonGia(?, ?)}", soluong, 1);
+	                    } else if (jrbBehon.isSelected()) {
+	                        locSoLuong("{CALL sp_LocSanPhamTheoDonGia(?, ?)}", soluong, 2);
+	                    }
+	                } catch (NumberFormatException ex) {
+	                    JOptionPane.showMessageDialog(null, "Vui lòng nhập một số hợp lệ cho số lượng.");
+	                }
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Vui lòng nhập số lượng.");
+	            }
+	        }
 
-			if (!selectedXuatXu.equals("xuatXu")) {
-
-				locXuatxu("{CALL sp_LocSanPhamTheoXuatXu(?)}", selectedXuatXu);
-				if (!selectedThuonghieu.equals("thuongHieu")) {
-
-					locXuatxu("{CALL sp_LocSanPhamTheoThuonghieu(?)}", selectedThuonghieu);
-				}
-			}
-			if (jcbSL.isSelected()) {
-				int soluong = Integer.parseInt(jtfNhapSo.getText().toString());
-				if(jrbLonhon.isSelected()) {
-					locSoLuong("{CALL sp_LocSanPhamTheoSoLuong(?, ?)}", soluong, 1);
-				}else if(jrbBehon.isSelected()){
-					locSoLuong("{CALL sp_LocSanPhamTheoSoLuong(?, ?)}", soluong, 2);
-				}
-				
-			}
-
-			if (selectedXuatXu.equals("xuatXu") && selectedThuonghieu.equals("thuongHieu") && "".equals(selected)) {
-				model.setRowCount(0);
-				hienTable(dsSp);
-			}
-
-		}
-
+	        // Hiển thị tất cả nếu không có bộ lọc nào
+	        if (selectedXuatXu.equals("xuatXu") && selectedThuonghieu.equals("thuongHieu") && "".equals(selected)&&!jcbDG.isSelected()&&!jcbSL.isSelected()) {
+	            model.setRowCount(0);
+	            hienTable(dsSp);
+	        }
+	    }
 	}
+
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -965,7 +992,6 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 
 	void locSoLuong(String callStore, int soLuong, int i) {
 		String storedProcedureCall = callStore;
-
 		try {
 			ConnectDB.getInstance().connect();
 			Connection con = ConnectDB.getConnection();
@@ -977,20 +1003,20 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 
 			ResultSet rs = callableStatement.executeQuery();
 			model.setRowCount(0);
-
 			while (rs.next()) {
 				String maSP = rs.getString(1);
 				String tenSp = rs.getString(2);
 				String loaiSP = rs.getString(3);
-				int sl = rs.getInt(4);
+				int soLuong1 = Integer.parseInt(rs.getString(4));
 				String xuatXu = rs.getString(5);
 				String thuongHieu = rs.getString(6);
 				String moTa = rs.getString(7);
 				String nhaSanXuat = rs.getString(8);
-				double donGia = rs.getDouble(9);
+				double donGia = Double.parseDouble(rs.getString(9));
 
 				NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-				String[] row = { maSP, tenSp, loaiSP, sl + "", xuatXu, thuongHieu, moTa, nhaSanXuat,
+
+				String[] row = { maSP, tenSp, loaiSP, soLuong1 + "", xuatXu, thuongHieu, moTa, nhaSanXuat,
 						currencyFormatter.format(donGia) };
 				model.addRow(row);
 			}

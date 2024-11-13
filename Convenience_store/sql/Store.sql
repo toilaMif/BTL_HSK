@@ -161,7 +161,15 @@ BEGIN
     FROM SanPham
     WHERE thuongHieu = @thuongHieu;
 END;
-
+-- lọc Loai sp
+CREATE PROCEDURE sp_LocSanPhamTheoLoai 
+    @loai NVARCHAR(50)
+AS
+BEGIN
+    SELECT *
+    FROM SanPham
+    WHERE thuongHieu = @loai;
+END;
 --Xóa sản phẩm
 CREATE PROCEDURE sp_XoaSanPhamTheoMa
     @maSP VARCHAR(10)
@@ -191,3 +199,69 @@ BEGIN
 
     
 END;	
+ --lọc đơn giá
+  CREATE PROCEDURE sp_LocSanPhamTheoDonGia
+    @soLuong INT,
+    @operator INT -- Nhận giá trị 1 hoặc 2 để lọc
+AS
+BEGIN
+    IF @operator = 1
+    BEGIN
+        SELECT *
+        FROM SanPham
+        WHERE donGia > @soLuong;
+    END
+    ELSE IF @operator = 2
+    BEGIN
+        SELECT *
+        FROM SanPham
+        WHERE donGia < @soLuong;
+    END
+
+    
+END;
+
+--đếm số lượng hóa đơn
+CREATE PROCEDURE GetInvoiceCount
+AS
+BEGIN
+    SELECT COUNT(*) AS SoLuongHoaDon
+    FROM [QLStore].[dbo].[HoaDon];
+END;
+
+--đếm số lượng Khách Hàng
+CREATE PROCEDURE GetKhcount
+AS
+BEGIN
+    SELECT COUNT(*) AS SoLuongKH
+    FROM [QLStore].[dbo].[KhachHang];
+END;
+
+--Tìm khách hàng
+CREATE PROCEDURE sp_TimKhachHang
+    @tenKH NVARCHAR(100) = NULL,
+    @ngaySinh DATE = NULL,
+    @gioiTinh NVARCHAR(10) = NULL,
+    @loaiThanhVien NVARCHAR(50) = NULL
+AS
+BEGIN
+    SELECT [maKH], [tenKH], [ngaySinh], [gioiTinh], [loaiThanhVien]
+    FROM [QLStore].[dbo].[KhachHang]
+    WHERE 
+        (@tenKH IS NULL OR [tenKH] LIKE '%' + @tenKH + '%')
+        AND (@ngaySinh IS NULL OR [ngaySinh] = @ngaySinh)
+        AND (@gioiTinh IS NULL OR [gioiTinh] = @gioiTinh)
+        AND (@loaiThanhVien IS NULL OR [loaiThanhVien] LIKE '%' + @loaiThanhVien + '%')
+END;
+--Thêm khách hàng
+CREATE PROCEDURE ThemKhachHang 
+	@maKH varchar(10),
+    @tenKH NVARCHAR(100),
+    @ngaySinh DATE,
+    @gioiTinh NVARCHAR(10),
+    @loaiThanhVien NVARCHAR(20)
+AS
+BEGIN
+    INSERT INTO KhachHang (maKH,tenKH, ngaySinh, gioiTinh, loaiThanhVien)
+    VALUES (@maKH,@tenKH, @ngaySinh, @gioiTinh, @loaiThanhVien)
+END
