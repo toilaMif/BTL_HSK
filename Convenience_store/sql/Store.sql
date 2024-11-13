@@ -265,3 +265,20 @@ BEGIN
     INSERT INTO KhachHang (maKH,tenKH, ngaySinh, gioiTinh, loaiThanhVien)
     VALUES (@maKH,@tenKH, @ngaySinh, @gioiTinh, @loaiThanhVien)
 END
+--Thêm hóa đơn
+CREATE PROCEDURE ThemHoaDon
+    @maHD varchar(10),
+    @ngayLap DATE,
+    @tongTien DECIMAL(18, 2),
+    @hinhThucThanhToan NVARCHAR(50),
+    @maKH varchar(10),
+    @maNV nvarchar(30)
+   
+AS
+BEGIN
+    INSERT INTO [QLStore].[dbo].[HoaDon]
+        ([maHoaDon], [ngayLap], [tongTien], [hinhThucThanhToan], [maKH], [maNV])
+    VALUES
+        (@maHD, @ngayLap, @tongTien, @hinhThucThanhToan, @maKH, @maNV);
+END
+

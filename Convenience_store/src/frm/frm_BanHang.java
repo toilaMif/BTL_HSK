@@ -93,7 +93,7 @@ public class frm_BanHang extends frm_default implements ActionListener, MouseLis
 	private JPanel panelContainer;
 	private JSpinner dateSpinner;
 	private JComboBox<String> jcboxDM;
-	private double tongthanhtien =0;
+	private double tongthanhtien = 0;
 
 	public frm_BanHang() {
 		super(maTK_login);
@@ -364,34 +364,28 @@ public class frm_BanHang extends frm_default implements ActionListener, MouseLis
 	}
 
 	void ThemVaoHD(String masp) {
-	    SanPham sp = dsSP.TimSP(masp);
-	    
-	    if (sp != null) {
+		SanPham sp = dsSP.TimSP(masp);
 
-	        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+		if (sp != null) {
 
-	        String tenSp = sp.getTenSp();
-	        int soLuong = 1;
-	        double donGia = sp.getDonGia();
-	        double thanhTien = donGia * soLuong; 
-	        
-	        tongthanhtien+= thanhTien;
-	        String[] row = {
-	            tenSp,
-	            String.valueOf(soLuong),
-	            currencyFormatter.format(donGia),
-	            currencyFormatter.format(thanhTien)
-	        };
+			NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
-	        modelHD.addRow(row);
-	        jlTongTienHD.setText("Tổng Tiền: " +currencyFormatter.format(tongthanhtien)+"");
-	        
+			String tenSp = sp.getTenSp();
+			int soLuong = 1;
+			double donGia = sp.getDonGia();
+			double thanhTien = donGia * soLuong;
 
-	        tableHD.revalidate();
-	        tableHD.repaint();
-	    }
+			tongthanhtien += thanhTien;
+			String[] row = { tenSp, String.valueOf(soLuong), currencyFormatter.format(donGia),
+					currencyFormatter.format(thanhTien) };
+
+			modelHD.addRow(row);
+			jlTongTienHD.setText("Tổng Tiền: " + currencyFormatter.format(tongthanhtien) + "");
+
+			tableHD.revalidate();
+			tableHD.repaint();
+		}
 	}
-
 
 	void HienThiSPBAN(dsSanPham dsSP, Color c) {
 		panelContainer.removeAll();
@@ -549,12 +543,19 @@ public class frm_BanHang extends frm_default implements ActionListener, MouseLis
 			boxHD2111.repaint();
 		}
 		if (e.getSource().equals(jbtLuuHD)) {
-
 			String maHd = "HD" + String.format("%03d", soHD() + 1);
 			jlTmaHD.setText("Mã HD: " + maHd);
-
+			
+			double tongtien = tongthanhtien;
+			
+			String HTTT = (String) jcbHTTTHD.getSelectedItem();
+			String tenkh = jtfTenKH.getText();
+			String TenNV = menuDNTK.getText();
+//			luusql("{CALL ThemHoaDon(?, ?, ?, ?, ?, ?)}", maHd, null, tongtien, HTTT, tenkh, TenNV);
+			JOptionPane.showMessageDialog(this, "Lưu thành công");
+			
 		} else if (e.getSource().equals(jbtXoaRongHD)) {
-
+			xoaRong();
 		} else if (e.getSource().equals(jbKHTIM)) {
 
 			String tenKH = jtfTenKH.getText().toString();
@@ -605,6 +606,20 @@ public class frm_BanHang extends frm_default implements ActionListener, MouseLis
 			jlTenKHHD.setText(jtfTenKH.getText());
 
 		}
+	}
+
+	void xoaRong() {
+		jtfTenKH.setText("");
+		jtfTimMa.setText("");
+		jtfTimTen.setText("");
+		jbGRKH.clearSelection();
+		jrbKHNU.setSelected(false);
+		jlTenKH.setText("Tên KH");
+		jcbHTTTHD.setSelectedIndex(0);
+		jcboxDM.setSelectedIndex(0);
+		HienThiSPBAN(dsSP, Color.red);
+		jlTongTienHD.setText("Tổng Tiền: ");
+		modelHD.setRowCount(0);
 	}
 
 	int soHD() {
@@ -815,7 +830,29 @@ public class frm_BanHang extends frm_default implements ActionListener, MouseLis
 		}
 
 	}
-	
-	
+
+	void luusql(String callStore, String maHD, Date ngayLap, double tongTien, String hinhThucThanhToan, String maKH, String maNV) {
+		String storedProcedureCall = callStore;
+		try {
+			ConnectDB.getInstance().connect();
+			Connection con = ConnectDB.getConnection();
+
+			CallableStatement callableStatement = con.prepareCall(storedProcedureCall);
+	     
+	        callableStatement.setString(1, maHD);
+	        callableStatement.setDate(2, (java.sql.Date) ngayLap);
+	        callableStatement.setDouble(3, tongTien);
+	        callableStatement.setString(4, hinhThucThanhToan);
+	        callableStatement.setString(5, maKH);
+	        callableStatement.setString(6, maNV);
+
+	        callableStatement.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.err.println("Error executing stored procedure: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+
 
 }
