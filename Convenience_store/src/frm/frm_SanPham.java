@@ -50,6 +50,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.ConnectDB;
 import controller.readDataSP;
+import controller.writeDataSP;
 import dao.dsSanPham;
 import entity.SanPham;
 
@@ -133,6 +134,7 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 	private Box b2132;
 	private Box b2133;
 	private static String maTK_login = login_page.getMaTK_login();
+
 	public frm_SanPham() {
 		super(maTK_login);
 		jlTitle.setText("Quản Lý Sản Phẩm");
@@ -287,7 +289,7 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		b11.add(jbtTim);
 		b11.add(jtfTim);
 
-		String[] jcbSapxep = { "Số Lượng", "Đơn Giá", };
+		String[] jcbSapxep = { "", "Số Lượng", "Đơn Giá", };
 		jcboxSapxep = new JComboBox<String>(jcbSapxep);
 		jcboxSapxep.setPreferredSize(new Dimension(100, 25));
 
@@ -445,7 +447,7 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 //		bBTNcen.add(a1);
 //		bBTNcen.add(a3);
 //		bBTNcen.add(a4);
-		jbtnQL = new JButton("Quản lý");
+		jbtnQL = new JButton("Bán Hàng");
 		jbtnQL.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.WHITE, Color.WHITE));
 		jbtnQL.setBackground(new Color(163, 184, 204));
 		jbtnQL.setForeground(Color.white);
@@ -531,6 +533,12 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		jcboxSapxep.addActionListener(this);
 		jrbSLTang.addActionListener(this);
 		jrbSLGiam.addActionListener(this);
+		jcbLocXX.addActionListener(this);
+		jcbLocTH.addActionListener(this);
+		jcbSL.addActionListener(this);
+		jcbDG.addActionListener(this);
+		jrbLonhon.addActionListener(this);
+		jrbBehon.addActionListener(this);
 
 		setVisible(true);
 	}
@@ -560,20 +568,37 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		}
 	}
 
+	void luu(dsSanPham dsSP) {
+		for (int i = 0; i < dsSP.soLuongSP(); i++) {
+			SanPham sanPham = dsSP.returnSP(i);
+
+			boolean isInserted = writeDataSP.writeSP(sanPham);
+
+		}
+		JOptionPane.showMessageDialog(null, " Hoàn tất lưu danh sách sản phẩm");
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		super.actionPerformed(e);
 		Object o = e.getSource();
+
+		String selected = (String) jcboxSapxep.getSelectedItem();
+		String selectedXuatXu = jcbLocXX.getSelectedItem().toString();
+		String selectedThuonghieu = jcbLocTH.getSelectedItem().toString();
+
 		if (o.equals(jbtnThoat)) {
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
 			setVisible(false);
 			this.dispose();
 		} else if (o.equals(jbtnLuu)) {
-
+			luu(dsSp);
 		} else if (o.equals(jbtnThem)) {
 			them();
 		} else if (o.equals(jbtnQL)) {
-
+			new frm_BanHang();
+			this.dispose();
 		} else if (o.equals(jbtnChiTiec)) {
 			int row = table.getSelectedRow();
 			if (row != -1) {
@@ -592,24 +617,47 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		} else if (o.equals(jbtTim)) {
 			String masp = jtfTim.getText();
 			TimSPTheoMa(masp);
-		}
+		} else {
+			if ("Số Lượng".equals(selected)) {
+				if (jrbSLTang.isSelected()) {
+					sapxep("{CALL GetSanPhamSorted(?)}", "ASC");
+				} else if (jrbSLGiam.isSelected()) {
+					sapxep("{CALL GetSanPhamSorted(?)}", "DESC");
+				}
 
-		String selected = (String) jcboxSapxep.getSelectedItem();
+			}
+			if ("Đơn Giá".equals(selected)) {
+				if (jrbSLTang.isSelected()) {
+					sapxep("{CALL SapxepDonGia(?)}", "ASC");
+				} else if (jrbSLGiam.isSelected()) {
+					sapxep("{CALL SapxepDonGia(?)}", "DESC");
+				}
 
-		if ("Số Lượng".equals(selected)) {
-			if (jrbSLTang.isSelected()) {
-				sapxep("{CALL GetSanPhamSorted(?)}", "ASC");
 			}
-			if (jrbSLGiam.isSelected()) {
-				sapxep("{CALL GetSanPhamSorted(?)}", "DESC");
+
+			if (!selectedXuatXu.equals("xuatXu")) {
+
+				locXuatxu("{CALL sp_LocSanPhamTheoXuatXu(?)}", selectedXuatXu);
+				if (!selectedThuonghieu.equals("thuongHieu")) {
+
+					locXuatxu("{CALL sp_LocSanPhamTheoThuonghieu(?)}", selectedThuonghieu);
+				}
 			}
-		} else if ("Đơn Giá".equals(selected)) {
-			if (jrbSLTang.isSelected()) {
-				sapxep("{CALL SapxepDonGia(?)}", "ASC");
+			if (jcbSL.isSelected()) {
+				int soluong = Integer.parseInt(jtfNhapSo.getText().toString());
+				if(jrbLonhon.isSelected()) {
+					locSoLuong("{CALL sp_LocSanPhamTheoSoLuong(?, ?)}", soluong, 1);
+				}else if(jrbBehon.isSelected()){
+					locSoLuong("{CALL sp_LocSanPhamTheoSoLuong(?, ?)}", soluong, 2);
+				}
+				
 			}
-			if (jrbSLGiam.isSelected()) {
-				sapxep("{CALL SapxepDonGia(?)}", "DESC");
+
+			if (selectedXuatXu.equals("xuatXu") && selectedThuonghieu.equals("thuongHieu") && "".equals(selected)) {
+				model.setRowCount(0);
+				hienTable(dsSp);
 			}
+
 		}
 
 	}
@@ -618,15 +666,18 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 	public void mouseClicked(MouseEvent e) {
 		int row = table.getSelectedRow();
 
-		jtfMaSP.setText(table.getValueAt(row, 0) + "");
-		jtfTenSP.setText(table.getValueAt(row, 1) + "");
-		jtfLoaiSP.setText(table.getValueAt(row, 2) + "");
-		jtfSoluong.setText(table.getValueAt(row, 3) + "");
-		jtXuatxu.setText(table.getValueAt(row, 4) + "");
-		jtfThuonghieu.setText(table.getValueAt(row, 5) + "");
-		jtfMota.setText(table.getValueAt(row, 6) + "");
-		jtfNhasx.setText(table.getValueAt(row, 7) + "");
-		jtfDongia.setText(table.getValueAt(row, 8) + "");
+		jtfMaSP.setText(table.getValueAt(row, 0).toString());
+		jtfTenSP.setText(table.getValueAt(row, 1).toString());
+		jtfLoaiSP.setText(table.getValueAt(row, 2).toString());
+		jtfSoluong.setText(table.getValueAt(row, 3).toString());
+		jtXuatxu.setText(table.getValueAt(row, 4).toString());
+		jtfThuonghieu.setText(table.getValueAt(row, 5).toString());
+		jtfMota.setText(table.getValueAt(row, 6).toString());
+		jtfNhasx.setText(table.getValueAt(row, 7).toString());
+
+		String giaStr = table.getValueAt(row, 8).toString();
+		giaStr = giaStr.replaceAll("[^\\d]", "");
+		jtfDongia.setText(giaStr);
 
 		jlkten.setText("Tên: " + table.getValueAt(row, 1) + "");
 		jlkgia.setText("Giá: " + table.getValueAt(row, 8) + "");
@@ -664,11 +715,27 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		jtfNhasx.setText("");
 		jtfDongia.setText("");
 
+		jtfTim.setText("");
+		jcboxSapxep.setSelectedIndex(0);
+		jcbLocTH.setSelectedIndex(0);
+		jcbLocXX.setSelectedIndex(0);
+
+		groupDG.clearSelection();
+		groupSL.clearSelection();
+
+		jcbDG.setSelected(false);
+		jcbSL.setSelected(false);
 		table.clearSelection();
 	}
 
 	void them() {
 		String maSP = jtfMaSP.getText();
+
+		if (!maSP.matches("SP\\d{4}")) {
+			JOptionPane.showMessageDialog(null, "Mã Sản Phẩm phải có định dạng 'SP' và theo sau là 4 chữ số!");
+			return;
+		}
+
 		String tenSp = jtfTenSP.getText();
 		String loaiSP = jtfLoaiSP.getText();
 		int soLuong = Integer.parseInt(jtfSoluong.getText().toString());
@@ -699,6 +766,7 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 //			int hoinhac = JOptionPane.showConfirmDialog(this, JOptionPane.YES_NO_OPTION,)
 
 			if (dsSp.xoaSP(maSP)) {
+				xoaSQL("{CALL sp_XoaSanPhamTheoMa(?)}", maSP);
 				model.removeRow(row);
 				table.show();
 
@@ -833,21 +901,125 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 
 	}
 
+	void xoaSQL(String callStore, String maxoa) {
+		String storedProcedureCall = callStore;
+		try {
+			ConnectDB.getInstance().connect();
+			Connection con = ConnectDB.getConnection();
+
+			CallableStatement callableStatement = con.prepareCall(storedProcedureCall);
+
+			callableStatement.setString(1, maxoa);
+
+			ResultSet rs = callableStatement.executeQuery();
+
+			rs.close();
+			callableStatement.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	void locXuatxu(String callStore, String xuatxu) {
+		String storedProcedureCall = callStore;
+		try {
+			ConnectDB.getInstance().connect();
+			Connection con = ConnectDB.getConnection();
+
+			CallableStatement callableStatement = con.prepareCall(storedProcedureCall);
+
+			callableStatement.setString(1, xuatxu);
+
+			ResultSet rs = callableStatement.executeQuery();
+			model.setRowCount(0);
+			while (rs.next()) {
+				String maSP = rs.getString(1);
+				String tenSp = rs.getString(2);
+				String loaiSP = rs.getString(3);
+				int soLuong = Integer.parseInt(rs.getString(4));
+				String xuatXu = rs.getString(5);
+				String thuongHieu = rs.getString(6);
+				String moTa = rs.getString(7);
+				String nhaSanXuat = rs.getString(8);
+				double donGia = Double.parseDouble(rs.getString(9));
+
+				NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+				String[] row = { maSP, tenSp, loaiSP, soLuong + "", xuatXu, thuongHieu, moTa, nhaSanXuat,
+						currencyFormatter.format(donGia) };
+				model.addRow(row);
+			}
+
+			rs.close();
+			callableStatement.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	void locSoLuong(String callStore, int soLuong, int i) {
+		String storedProcedureCall = callStore;
+
+		try {
+			ConnectDB.getInstance().connect();
+			Connection con = ConnectDB.getConnection();
+
+			CallableStatement callableStatement = con.prepareCall(storedProcedureCall);
+
+			callableStatement.setInt(1, soLuong);
+			callableStatement.setInt(2, i);
+
+			ResultSet rs = callableStatement.executeQuery();
+			model.setRowCount(0);
+
+			while (rs.next()) {
+				String maSP = rs.getString(1);
+				String tenSp = rs.getString(2);
+				String loaiSP = rs.getString(3);
+				int sl = rs.getInt(4);
+				String xuatXu = rs.getString(5);
+				String thuongHieu = rs.getString(6);
+				String moTa = rs.getString(7);
+				String nhaSanXuat = rs.getString(8);
+				double donGia = rs.getDouble(9);
+
+				NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+				String[] row = { maSP, tenSp, loaiSP, sl + "", xuatXu, thuongHieu, moTa, nhaSanXuat,
+						currencyFormatter.format(donGia) };
+				model.addRow(row);
+			}
+
+			rs.close();
+			callableStatement.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	void layDataJCBox(JComboBox<String> jcbBox, String namebang, String namecol) {
 		try {
 			ConnectDB.getInstance().connect();
 			Connection con = ConnectDB.getConnection();
-			String sql = "SELECT DISTINCT ["+namecol+"]" + "["+namecol+"]" + "FROM [QLStore].[dbo].["+namebang+"]";
+			String sql = "SELECT DISTINCT [" + namecol + "]" + "[" + namecol + "]" + "FROM [QLStore].[dbo].[" + namebang
+					+ "]";
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
 
 			jcbBox.removeAllItems();
-
+			jcbBox.addItem(namecol);
 			while (rs.next()) {
-                String add = rs.getString(namecol);
-                jcbBox.addItem(add);
-            }
-			
+				String add = rs.getString(namecol);
+				jcbBox.addItem(add);
+			}
+
 			rs.close();
 			con.close();
 

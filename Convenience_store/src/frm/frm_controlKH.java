@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,7 +27,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class frm_controlKH extends frm_default implements ActionListener, MouseListener{
+public class frm_controlKH extends frm_default implements MouseListener, ActionListener{
 	private static String maTK_login = login_page.getMaTK_login();
 	private DefaultTableModel modeltb;
 	private JTable table;
@@ -223,6 +224,11 @@ public class frm_controlKH extends frm_default implements ActionListener, MouseL
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		super.actionPerformed(e);
 	}
 	
 }

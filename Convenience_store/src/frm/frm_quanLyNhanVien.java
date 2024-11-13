@@ -457,6 +457,7 @@ public class frm_quanLyNhanVien extends frm_default implements ActionListener, M
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		super.actionPerformed(e);
 		Object o = e.getSource();
 		if(o.equals(btnThem)) {
 			themAction();

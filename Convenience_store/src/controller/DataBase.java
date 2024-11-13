@@ -21,7 +21,7 @@ public class DataBase {
     }
 
     private void connect() {
-        String url = "jdbc:sqlserver://localhost:49870;databasename=QLstore";
+        String url = "jdbc:sqlserver://localhost:1433;databasename=QLstore";
         String user = "sa";
         String password = "123!@#";
 

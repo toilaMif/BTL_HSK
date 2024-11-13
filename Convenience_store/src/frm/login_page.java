@@ -149,7 +149,7 @@ public class login_page extends JFrame implements ActionListener, MouseListener 
                 JOptionPane.showMessageDialog(btnDangNhap, "Đăng nhập thành công");
                  maTK_login = userName;
                 
-                new frm_default(maTK_login).setVisible(true);
+                new frm_BanHang().setVisible(true);
 //                new frm_quanLyNhanVien(maTK_login).setVisible(true);
                 this.dispose();
             } else {
