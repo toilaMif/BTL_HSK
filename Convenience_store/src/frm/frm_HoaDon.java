@@ -60,12 +60,12 @@ public class frm_HoaDon extends frm_default implements ActionListener ,MouseList
 	private ButtonGroup sBB;
 	private JRadioButton sortByFuture, sortByPast, sortByIDAsc, sortByIDDesc,  sortByMoneyAsc, sortByMoneyDesc ;
 	
-	
+	private static String maTK_login = login_page.getMaTK_login();
 	private quanLiHD dsHD ;
 	private JButton xoaSB;
 	
 	public frm_HoaDon() {
-		super();
+		super(maTK_login);
 //		jlTitle.setText("Quản lí khách hàng");
 //		jpCen.setBackground(Color.LIGHT_GRAY);
 		JPanel contain = new JPanel(new BorderLayout());

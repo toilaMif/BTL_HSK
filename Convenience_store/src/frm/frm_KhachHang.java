@@ -29,9 +29,9 @@ public class frm_KhachHang extends frm_default implements ActionListener, MouseL
 
 	private DefaultTableModel modeltb;
 	private JTable table;
-	
+	private static String maTK_login = login_page.getMaTK_login();
 	public frm_KhachHang() {
-		super();
+		super(maTK_login);
 //		jlTitle.setText("Quản lí khách hàng");
 		jpCen.setBackground(Color.LIGHT_GRAY);
 		JPanel contain = new JPanel(new BorderLayout());

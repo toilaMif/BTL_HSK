@@ -4,50 +4,80 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class NhanVien {
-	
+public class NhanVien implements Serializable{
 	private String maNV;
 	private String tenNV;
-	private boolean phai;
 	private LocalDate ngaySinh;
 	private String diaChi;
-	private String sdt;
+	private boolean phai;
+	private double luong;
 	private LocalDate ngayVaoLam;
-	
-	
+	private String sdt;
+	private String maTK;
+
 	public NhanVien(String maNV) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = "";
-		this.phai = true;
 		this.ngaySinh = LocalDate.now();
 		this.diaChi = "";
-		this.sdt = "";
+		this.phai = true;
+		this.luong = 0.0;
 		this.ngayVaoLam = LocalDate.now();
+		this.sdt = "";
+		this.maTK = " ";
 	}
-	public NhanVien(String maNV, String tenNV, boolean phai, LocalDate ngaySinh, String diaChi, String sdt,
-			LocalDate ngayVaoLam) {
-		super();
-		this.maNV = maNV;
-		this.tenNV = tenNV;
-		this.phai = phai;
-		this.ngaySinh = ngaySinh;
-		this.diaChi = diaChi;
-		this.sdt = sdt;
-		this.ngayVaoLam = ngayVaoLam;
-	}
+	
+	
 	
 	public NhanVien(String maNV, String tenNV) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = tenNV;
 	}
-	
+
+
+
+	public NhanVien(String maNV, String tenNV, LocalDate ngaySinh, String diaChi, boolean phai, double luong,
+			LocalDate ngayVaoLam, String sdt, String maTK) {
+		super();
+		this.maNV = maNV;
+		this.tenNV = tenNV;
+		this.ngaySinh = ngaySinh;
+		this.diaChi = diaChi;
+		this.phai = phai;
+		this.luong = luong;
+		this.ngayVaoLam = ngayVaoLam;
+		this.sdt = sdt;
+		this.maTK = maTK;
+	}
+
+	public NhanVien(String maNV, String tenNV, LocalDate ngaySinh, String diaChi, boolean phai, double luong,
+			LocalDate ngayVaoLam, String sdt) {
+		super();
+		this.maNV = maNV;
+		this.tenNV = tenNV;	
+		this.ngaySinh = ngaySinh;
+		this.diaChi = diaChi;
+		this.phai = phai;
+		this.luong = luong;
+		this.ngayVaoLam = ngayVaoLam;
+		this.sdt = sdt;
+	}
+
+
 	public String getMaNV() {
 		return maNV;
 	}
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
+	}
+	
+	public String getMaTK() {
+		return maTK;
+	}
+	public void setMaTK(String maTK) {
+		this.maTK = maTK;
 	}
 	public String getTenNV() {
 		return tenNV;
@@ -85,6 +115,12 @@ public class NhanVien {
 	public void setNgayVaoLam(LocalDate ngayVaoLam) {
 		this.ngayVaoLam = ngayVaoLam;
 	}
+	public double getLuong() {
+		return luong;
+	}
+	public void setLuong(double luong) {
+		this.luong = luong;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(maNV);
@@ -97,8 +133,9 @@ public class NhanVien {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+
 		NhanVien other = (NhanVien) obj;
-		return Objects.equals(maNV, other.maNV);
+		return Objects.equals(maNV, other.maNV) || Objects.equals(tenNV, other.tenNV);
 	}
 
 }

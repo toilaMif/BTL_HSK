@@ -74,9 +74,10 @@ public class frm_HD extends frm_default implements ActionListener, MouseListener
 	private JTextField tongTienField;
 	private JTextField hinhThucThanhToanField;
 	private JTextField maNVField;
-	
+	private static String maTK_login = login_page.getMaTK_login();
 	public frm_HD() {
-		super();
+		
+		super(maTK_login);
 //		jlTitle.setText("Quản lí khách hàng");
 //		jpCen.setBackground(Color.LIGHT_GRAY);
 		JPanel contain = new JPanel(new BorderLayout());

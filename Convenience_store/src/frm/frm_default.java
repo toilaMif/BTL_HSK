@@ -69,7 +69,7 @@ public class frm_default extends JFrame implements ActionListener{
 	 public JMenuItem mnuItemTKDT;
 
 
-	public frm_default() {
+	public frm_default(String maTK_login) {
 		super("Cửa Hàng Tiện Lợi");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 //		setSize(500, 550);
@@ -334,6 +334,7 @@ public class frm_default extends JFrame implements ActionListener{
 		menuDNTK.setForeground(Color.WHITE);
 		menuDNTK.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 16));
 		menuDNTK.setIcon(new ImageIcon(getClass().getResource("/image/ICONTK.png")));
+		menuDNTK.setText(maTK_login);
 		menubar.add(menuDNTK);
 		
 		

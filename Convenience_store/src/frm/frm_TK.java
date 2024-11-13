@@ -59,11 +59,11 @@ public class frm_TK extends frm_default implements ActionListener, MouseListener
 	private JLabel tongThu;
 	private JTextField txtTot1;
 	private JTextField txtTot2;
-	
+	private static String maTK_login = login_page.getMaTK_login();
 	private quanLiHD dsHD;
 	
 	public frm_TK() {
-		super();
+		super(maTK_login);
 //		jlTitle.setText("Quản lí khách hàng");
 //		jpCen.setBackground(Color.LIGHT_GRAY);
 		JPanel contain = new JPanel(new BorderLayout());

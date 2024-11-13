@@ -21,6 +21,8 @@ import dao.dsSanPham;
 import entity.SanPham;
 
 public class frm_BanHang extends frm_default implements ActionListener, MouseListener{
+	private static String maTK_login = login_page.getMaTK_login();
+
 	private JPanel bTT;
 	
 	private JPanel jbTT1;
@@ -85,7 +87,7 @@ public class frm_BanHang extends frm_default implements ActionListener, MouseLis
 
 
 	public frm_BanHang() {
-		super();
+		super(maTK_login);
 		jlTitle.setText("Bán Hàng");
 		jpCen.setLayout(new BorderLayout());
 		jpCen.add(jlTitle, BorderLayout.NORTH);

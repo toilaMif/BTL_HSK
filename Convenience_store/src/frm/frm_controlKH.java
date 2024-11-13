@@ -27,7 +27,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class frm_controlKH extends frm_default implements ActionListener, MouseListener{
-
+	private static String maTK_login = login_page.getMaTK_login();
 	private DefaultTableModel modeltb;
 	private JTable table;
 	private JLabel tt1;
@@ -48,7 +48,7 @@ public class frm_controlKH extends frm_default implements ActionListener, MouseL
 	private JTextField tf21;
 	
 	public frm_controlKH() {
-		super();
+		super(maTK_login);
 //		jlTitle.setText("Quản lí khách hàng");
 		jpCen.setBackground(Color.LIGHT_GRAY);
 		JPanel contain = new JPanel(new BorderLayout());

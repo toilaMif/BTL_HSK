@@ -22,6 +22,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -131,9 +132,9 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 	private Box b2131;
 	private Box b2132;
 	private Box b2133;
-
+	private static String maTK_login = login_page.getMaTK_login();
 	public frm_SanPham() {
-		super();
+		super(maTK_login);
 		jlTitle.setText("Quản Lý Sản Phẩm");
 		jpCen.setLayout(new BorderLayout());
 		jpCen.add(jlTitle, BorderLayout.NORTH);
@@ -302,9 +303,11 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 
 		String[] jcbXuatxu = { "Xuất xứ", "Việt Nam", };
 		jcbLocXX = new JComboBox<String>(jcbXuatxu);
+		layDataJCBox(jcbLocXX, "SanPham", "xuatXu");
 
-		String[] jcbThuonghieu = { "Thương Hiệu", "Việt Nam", };
+		String[] jcbThuonghieu = { "Thương Hiệu", };
 		jcbLocTH = new JComboBox<String>(jcbThuonghieu);
+		layDataJCBox(jcbLocTH, "SanPham", "thuongHieu");
 
 		jcbSL = new JCheckBox("Số Lượng");
 		jcbSL.setBackground(Color.gray);
@@ -573,13 +576,13 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 
 		} else if (o.equals(jbtnChiTiec)) {
 			int row = table.getSelectedRow();
-			if(row!=-1) {
+			if (row != -1) {
 				String maSP = (table.getValueAt(row, 0) + "");
 				new frm_CTSP(maSP);
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "Chưa chọn Sản Phẩm");
 			}
-			
+
 		} else if (o.equals(jbtnSua)) {
 			sua();
 		} else if (o.equals(jbtnXoa)) {
@@ -594,19 +597,19 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		String selected = (String) jcboxSapxep.getSelectedItem();
 
 		if ("Số Lượng".equals(selected)) {
-			 if (jrbSLTang.isSelected()) {
-		            sapxep("{CALL GetSanPhamSorted(?)}", "ASC");
-		        }
-			 if (jrbSLGiam.isSelected()) {
-		            sapxep("{CALL GetSanPhamSorted(?)}", "DESC");
-			 }
+			if (jrbSLTang.isSelected()) {
+				sapxep("{CALL GetSanPhamSorted(?)}", "ASC");
+			}
+			if (jrbSLGiam.isSelected()) {
+				sapxep("{CALL GetSanPhamSorted(?)}", "DESC");
+			}
 		} else if ("Đơn Giá".equals(selected)) {
 			if (jrbSLTang.isSelected()) {
-	            sapxep("{CALL SapxepDonGia(?)}", "ASC");
-	        }
-		 if (jrbSLGiam.isSelected()) {
-	            sapxep("{CALL SapxepDonGia(?)}", "DESC");
-		 }
+				sapxep("{CALL SapxepDonGia(?)}", "ASC");
+			}
+			if (jrbSLGiam.isSelected()) {
+				sapxep("{CALL SapxepDonGia(?)}", "DESC");
+			}
 		}
 
 	}
@@ -633,8 +636,7 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		jlkSL.setText("Số Lượng: " + table.getValueAt(row, 3) + "");
 
 		;
-		
-		
+
 		try {
 			ImageIcon imageIcon = new ImageIcon(
 					getClass().getResource("/image/imgSP/" + table.getValueAt(row, 0) + "" + ".png"));
@@ -828,9 +830,31 @@ public class frm_SanPham extends frm_default implements ActionListener, MouseLis
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
+	void layDataJCBox(JComboBox<String> jcbBox, String namebang, String namecol) {
+		try {
+			ConnectDB.getInstance().connect();
+			Connection con = ConnectDB.getConnection();
+			String sql = "SELECT DISTINCT ["+namecol+"]" + "["+namecol+"]" + "FROM [QLStore].[dbo].["+namebang+"]";
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+
+			jcbBox.removeAllItems();
+
+			while (rs.next()) {
+                String add = rs.getString(namecol);
+                jcbBox.addItem(add);
+            }
+			
+			rs.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
